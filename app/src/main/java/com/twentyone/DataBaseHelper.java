@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+public class  DataBaseHelper extends SQLiteOpenHelper {
     private static SQLiteDatabase sqliteDb;
     private static DataBaseHelper instance;
     private static final int DATABASE_VERSION = 1;

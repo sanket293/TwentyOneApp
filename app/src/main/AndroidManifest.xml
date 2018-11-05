@@ -24,7 +24,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".GoalConfirmation"></activity>
+        <activity android:name=".GoalConfirmation" />
+        <activity android:name=".InstructionsActivity"></activity>
     </application>
 
 </manifest>

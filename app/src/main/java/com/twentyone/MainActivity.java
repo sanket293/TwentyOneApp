@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private Context context = MainActivity.this;
     private SharedPreferences sharedpreferences;
     private UserFields userFields = null;
-private    String email ="";
+    private String email = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +37,7 @@ private    String email ="";
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
 
-//        Gson gson = new Gson();
         email = sharedpreferences.getString(LoginActivity.USERNAME_KEY, "");
-//        userFields = new UserFields();
-//        userFields = gson.fromJson(json, UserFields.class);
 
         if (email.equalsIgnoreCase("")) { // if no user found or something went wrong it will go to login screen
 
@@ -48,6 +46,10 @@ private    String email ="";
             startActivity(new Intent(context, LoginActivity.class));
             finish();
         }
+
+
+
+
 
     }
 
@@ -80,7 +82,13 @@ private    String email ="";
 
 
     public void onCancelbtnClick(View view) {
+
+        startActivity(new Intent(context, GoalListActivity.class));
+
         etSetGoal.setText("");
+        finish();
+
+
     }
 
 }

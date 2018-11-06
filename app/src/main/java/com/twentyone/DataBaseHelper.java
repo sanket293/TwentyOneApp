@@ -13,8 +13,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-public class  DataBaseHelper extends SQLiteOpenHelper {
+public class DataBaseHelper extends SQLiteOpenHelper {
     private static SQLiteDatabase sqliteDb;
     private static DataBaseHelper instance;
     private static final int DATABASE_VERSION = 1;
@@ -159,7 +161,7 @@ public class  DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addGoalString(String name ,String goalStr) {
+    public boolean addGoalString(String name, String goalStr) {
 
 
         try {
@@ -167,11 +169,17 @@ public class  DataBaseHelper extends SQLiteOpenHelper {
                 sqliteDb.close();
             }
 
-            if (goalStr.equalsIgnoreCase("")||name.equalsIgnoreCase("")) {
+            if (goalStr.equalsIgnoreCase("") || name.equalsIgnoreCase("")) {
                 return false;
             }
 
+
             String query = "insert into UserGoalList(Name,Goal) values(" + name + "," + goalStr + ");";
+
+
+
+
+            
             sqliteDb = instance.getWritableDatabase();
             sqliteDb.execSQL(query);
 
@@ -185,18 +193,7 @@ public class  DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-
-
-
-
-
-
-
-
     ////////    SELECT
-
-
-
     public static UserFields checkCredentials(String email, String password) {
 
         UserFields userFields = null;
@@ -270,4 +267,55 @@ public class  DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public List<String> getGoalList(String email) {
+//        List<String> goalList = new ArrayList<>();
+        ArrayList<String> goalList = new ArrayList<>();
+
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+            sqliteDb = instance.getWritableDatabase();
+
+
+            String query = "select * from UserGoalList where Name =" + email + ";";
+
+
+            Cursor cursor = sqliteDb.rawQuery(query, null);
+
+            if (cursor != null) {
+
+
+//                while (cursor.moveToNext()) {
+//                    if (cursor.moveToFirst()) {
+//                        goalList.add(cursor.getString(cursor.getColumnIndex("Goal"))); //add the item
+//                    }
+//                }
+
+
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                goalList.add(cursor.getString(cursor.getColumnIndex("Goal"))); //add the item
+                cursor.moveToNext();
+
+
+            }
+
+
+                cursor.close();
+            } else {
+                Log.e("error in db", "cursor is null at goallist function");
+            }
+
+        } catch (
+                Exception e)
+
+        {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+        }
+        return goalList;
+
+    }
 }
+

@@ -62,17 +62,23 @@ public class LoginActivity extends AppCompatActivity {
 
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
-             //   Gson gson = new Gson();
-             //   String json = gson.toJson(user);
-              //  editor.putString(USER_OBJECT_KEY, json);
-                editor.putString(USERNAME_KEY, email);
+                //   Gson gson = new Gson();
+                //   String json = gson.toJson(user);
+                //  editor.putString(USER_OBJECT_KEY, json);
 
+                if (!user.getEmail().equalsIgnoreCase("")) {
+                    editor.putString(USERNAME_KEY, user.getEmail());
+                } else {
+                    Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
                 editor.commit();
             } catch (Exception e) {
                 Log.e("error", e.getMessage());
                 Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
             } finally {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, GoalListActivity.class));
                 finish();
 
             }

@@ -67,16 +67,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if (dataBaseHelper.addGoalString(email, setGoalStr)) {
-
-
-            Toast.makeText(context, getResources().getString(R.string.msg_GoalSuccessfully)
-                    , Toast.LENGTH_SHORT).show();
-        } else {
-
-            Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain)
-                    , Toast.LENGTH_SHORT).show();
-        }
+//        if (dataBaseHelper.addGoalString(email, setGoalStr)) {
+//
+//
+//            Toast.makeText(context, getResources().getString(R.string.msg_GoalSuccessfully)
+//                    , Toast.LENGTH_SHORT).show();
+//        } else {
+//
+//            Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain)
+//                    , Toast.LENGTH_SHORT).show();
+//        }
 
     }
 

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import static com.twentyone.LoginActivity.LOGIN_PREFERENCES;
 
 public class AddGoalActivity extends AppCompatActivity {
-    private EditText etSetGoal;
+    private EditText etSetGoal, etToalDaysForGoal;
     private DataBaseHelper dataBaseHelper;
     private Context context = AddGoalActivity.this;
     private SharedPreferences sharedpreferences;
@@ -30,6 +30,7 @@ public class AddGoalActivity extends AppCompatActivity {
 
         dataBaseHelper = DataBaseHelper.getInstance(context); //  create instance of db
         etSetGoal = (EditText) findViewById(R.id.etSetGoal);
+        etToalDaysForGoal = (EditText) findViewById(R.id.etToalDaysForGoal);
 
 
         sharedpreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
@@ -48,9 +49,6 @@ public class AddGoalActivity extends AppCompatActivity {
         }
 
 
-
-
-
     }
 
 
@@ -58,7 +56,7 @@ public class AddGoalActivity extends AppCompatActivity {
 
 
         String setGoalStr = etSetGoal.getText().toString().trim();
-
+        String totalDaysStr = etToalDaysForGoal.getText().toString().trim();
         if (setGoalStr.equalsIgnoreCase("")) {
             Toast.makeText(context, getResources().getString(R.string.err_PleaseAddGoal)
                     , Toast.LENGTH_SHORT).show();
@@ -66,8 +64,22 @@ public class AddGoalActivity extends AppCompatActivity {
             return;
         }
 
+        if (totalDaysStr.equalsIgnoreCase("")) {
+            Toast.makeText(context, getResources().getString(R.string.err_PleaseAddGoal)
+                    , Toast.LENGTH_SHORT).show();
 
-        if (dataBaseHelper.addGoalString(email, setGoalStr)) {
+            return;
+        }
+        int totalDays= Integer.parseInt(totalDaysStr);
+
+
+        UserGoalList userGoalList = new UserGoalList();
+        userGoalList.setGoal(setGoalStr);
+        userGoalList.setTotalDaysOfGoal(totalDays);
+        userGoalList.setName(email);
+        userGoalList.setIsGoalFinished(0);
+
+        if (dataBaseHelper.addGoalString(userGoalList)) {
 
 
             Toast.makeText(context, getResources().getString(R.string.msg_GoalSuccessfully)
@@ -77,8 +89,6 @@ public class AddGoalActivity extends AppCompatActivity {
             startActivity(new Intent(context, GoalListActivity.class));
             etSetGoal.setText("");
             finish();
-
-
 
 
         } else {
@@ -91,7 +101,6 @@ public class AddGoalActivity extends AppCompatActivity {
 
 
     public void onCancelbtnClick(View view) {
-
 
 
     }

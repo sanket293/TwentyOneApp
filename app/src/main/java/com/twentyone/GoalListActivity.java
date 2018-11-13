@@ -38,7 +38,7 @@ public class GoalListActivity extends AppCompatActivity {
 
         email = getUserName(context);
 
-        List<String> goalList = dataBaseHelper.getGoalList(email);
+        List<UserGoalList> goalList = dataBaseHelper.getGoalList(email);
         if (goalList.size() > 0) {
             ListviewAdapter listviewAdapter = new ListviewAdapter(goalList);
             lvGoalList.setAdapter(listviewAdapter);
@@ -54,9 +54,9 @@ public class GoalListActivity extends AppCompatActivity {
 
     public class ListviewAdapter extends BaseAdapter {
 
-        private List<String> goalList = new ArrayList<>();
+        private List<UserGoalList> goalList = new ArrayList<>();
 
-        public ListviewAdapter(List<String> goalList) {
+        public ListviewAdapter(List<UserGoalList> goalList) {
             this.goalList = goalList;
         }
 
@@ -95,13 +95,15 @@ public class GoalListActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.tvTextAdapter.setText(goalList.get(position).toString());
+            holder.tvTextAdapter.setText(goalList.get(position).getGoal().toString());
+
+            final int goalId =goalList.get(position).getGoalId();
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        startActivity(new Intent(context, MainActivity.class).putExtra("position", position));
+                        startActivity(new Intent(context, GoalConfirmation.class).putExtra("goalId", goalId));
                     } catch (Exception e) {
                         Log.e("error main row adapter", e.getMessage());
                     }

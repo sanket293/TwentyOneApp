@@ -12,6 +12,8 @@
     <string name="SignUp">SignUp</string>
 
 
+    <string name="No">No</string>
+    <string name="Yes">Yes</string>
     <string name="Name">Name</string>
     <string name="Phone_number">Phone Number</string>
     <string name="Phone">Phone</string>
@@ -20,10 +22,16 @@
     <string name="EnterYourGoal">Enter Your Goal</string>
     <string name="SetGoal">Set Goal</string>
     <string name="YourGoalList">Your Goal List</string>
+    <string name="YourGoal">Your Goal</string>
+    <string name="PleaseSelect">Please Select</string>
+    <string name="DidYouCompletedYourGoal">Did You Complete Your Goal?</string>
+    <string name="TotalDaysYouCompleted">Total Days You Completed</string>
+    <string name="HowManyDaysYouNeedToCompleteGoal">How Many Days You Need To Complete This Goal ?</string>
 
 
     <string name="msg_UserSuccessfullyRegistered">User Successfully Registered</string>
     <string name="msg_GoalSuccessfully">Goal Added Successfully</string>
+    <string name="msg_GoalActionSuccessfully">Goal Action Added Successfully</string>
 
 
     <string name="err_PasswordShouldNotdifferent">Please try again\nPassword should not be different</string>
@@ -35,6 +43,7 @@
     <string name="err_enter_your_password">Please Enter Your Password</string>
     <string name="err_enter_your_confirm_password">Please Enter Your Confirm Password</string>
     <string name="err_PleaseAddGoal">Please Enter Your Goal</string>
+    <string name="err_PleaseAddDays">Please Enter How Many Days You Need To Complete Your Goal</string>
 
 
     <string name="prompt_email">Email</string>

@@ -161,25 +161,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addGoalString(String name, String goalStr) {
+    public boolean addGoalString(UserGoalList goalList) {
 
+        UserGoalList userGoalList = goalList;
+
+        if (userGoalList == null) {
+            return false;
+        }
 
         try {
             if (sqliteDb.isOpen()) {
                 sqliteDb.close();
             }
 
-            if (goalStr.equalsIgnoreCase("") || name.equalsIgnoreCase("")) {
-                return false;
-            }
+
+            String goalStr = userGoalList.getGoal().toString();
+            String name = userGoalList.getName().toString();
+            String goalStartDate = name;    // check todo
+            int totalDays = userGoalList.getTotalDaysOfGoal();
+            int isGoalFinished = userGoalList.getIsGoalFinished();
 
 
-            String query = "insert into UserGoalList(Name,Goal) values(" + name + "," + goalStr + ");";
+//            String query1 = "insert into UserGoalList(Name,Goal,GoalCreatedDate,IsGoalFinished,TotalDaysOfGoal) values(" + name + "," + goalStr + "," + goalStartDate + "," + isGoalFinished + "," + totalDays + ");";
+            String query = "insert into UserGoalList(Name, Goal, GoalCreatedDate, IsGoalFinished,TotalDaysOfGoal) values(" + name + "," + goalStr + "," + goalStartDate + "," + isGoalFinished + "," + totalDays + ");";
 
 
-
-
-            
             sqliteDb = instance.getWritableDatabase();
             sqliteDb.execSQL(query);
 
@@ -267,9 +273,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<String> getGoalList(String email) {
+    public List<UserGoalList> getGoalList(String email) {
 //        List<String> goalList = new ArrayList<>();
-        ArrayList<String> goalList = new ArrayList<>();
+        //    ArrayList<String> goalList = new ArrayList<>();
+        ArrayList<UserGoalList> goalList = new ArrayList<>();
 
         try {
             if (sqliteDb.isOpen()) {
@@ -285,22 +292,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
             if (cursor != null) {
 
-
 //                while (cursor.moveToNext()) {
 //                    if (cursor.moveToFirst()) {
 //                        goalList.add(cursor.getString(cursor.getColumnIndex("Goal"))); //add the item
 //                    }
 //                }
 
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
 
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                goalList.add(cursor.getString(cursor.getColumnIndex("Goal"))); //add the item
-                cursor.moveToNext();
+                    int id = cursor.getInt(cursor.getColumnIndex("GoalId"));
 
+                    String name = cursor.getString(cursor.getColumnIndex("Name"));
+                    String goal = cursor.getString(cursor.getColumnIndex("Goal"));
+                    UserGoalList userGoalList = new UserGoalList(id, name, goal);
 
-            }
+                    goalList.add(userGoalList); //add the item
+                    cursor.moveToNext();
 
+                }
 
                 cursor.close();
             } else {
@@ -315,6 +325,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return goalList;
+
+    }
+
+    public UserGoalRecord getGoalRecord(int goalId) {
+
+
+        return null;
+    }
+
+    public boolean setGoalAction(UserGoalRecord record) {
+        UserGoalRecord goalRecord = record;
+
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+
+
+            String name = goalRecord.getName();
+            int goalId = goalRecord.getGoalId();
+            String goalActionDate = goalRecord.getGoalActionDate();
+            String goalAction = goalRecord.getGoalAction() + "";
+
+
+            String query = "insert into UserGoalRecord(GoalId,Name, GoalAction, GoalActionDate) values(" + goalId + "," + name + "," + goalAction + "," + goalActionDate + ");";
+
+
+            sqliteDb = instance.getWritableDatabase();
+            sqliteDb.execSQL(query);
+
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+
 
     }
 }

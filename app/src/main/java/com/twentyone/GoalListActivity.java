@@ -42,12 +42,11 @@ public class GoalListActivity extends AppCompatActivity {
         if (goalList.size() > 0) {
             ListviewAdapter listviewAdapter = new ListviewAdapter(goalList);
             lvGoalList.setAdapter(listviewAdapter);
-
-        }
+            }
     }
 
     public void onAddNewGoal(View view){
-        startActivity(new Intent(context,MainActivity.class));
+        startActivity(new Intent(context,AddGoalActivity.class));
         finish();
     }
 
@@ -116,5 +115,4 @@ public class GoalListActivity extends AppCompatActivity {
     public class ViewHolder {
         TextView tvTextAdapter;
     }
-
 }

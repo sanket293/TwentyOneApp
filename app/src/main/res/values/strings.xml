@@ -19,6 +19,7 @@
     <string name="SetYourHabitOrGoal">Set Your Habit Or Goal</string>
     <string name="EnterYourGoal">Enter Your Goal</string>
     <string name="SetGoal">Set Goal</string>
+    <string name="YourGoalList">Your Goal List</string>
 
 
     <string name="msg_UserSuccessfullyRegistered">User Successfully Registered</string>

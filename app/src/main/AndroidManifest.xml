@@ -25,7 +25,9 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".GoalConfirmation" />
-        <activity android:name=".InstructionsActivity"></activity>
+        <activity android:name=".InstructionsActivity" />
+        <activity android:name=".GoalListActivity" />
+        <activity android:name=".AddGoalActivity"></activity>
     </application>
 
 </manifest>

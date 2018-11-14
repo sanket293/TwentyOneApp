@@ -346,12 +346,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             String name = goalRecord.getName();
             int goalId = goalRecord.getGoalId();
             String goalActionDate = goalRecord.getGoalActionDate();
-            String goalAction = goalRecord.getGoalAction() + "";
+            int goalAction = goalRecord.getGoalAction();
 
+            String query = "insert into UserGoalRecord(GoalId,Name, GoalAction, GoalActionDate) " +
+                    "values(" + goalId + "," + name + "," + goalAction + ", '" + goalActionDate + "');";
 
-            String query = "insert into UserGoalRecord(GoalId,Name, GoalAction, GoalActionDate) values(" + goalId + "," + name + "," + goalAction + "," + goalActionDate + ");";
-
-
+            Log.e("query: ", "." + query);
             sqliteDb = instance.getWritableDatabase();
             sqliteDb.execSQL(query);
 

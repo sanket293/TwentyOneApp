@@ -95,7 +95,8 @@ public class GoalListActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.tvTextAdapter.setText(goalList.get(position).getGoal().toString());
+            final String goalName=goalList.get(position).getGoal().toString();
+            holder.tvTextAdapter.setText(goalName);
 
             final int goalId =goalList.get(position).getGoalId();
 
@@ -103,7 +104,7 @@ public class GoalListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     try {
-                        startActivity(new Intent(context, GoalConfirmation.class).putExtra("goalId", goalId));
+                        startActivity(new Intent(context, GoalConfirmation.class).putExtra("goalId", goalId).putExtra("goalName",goalName));
                     } catch (Exception e) {
                         Log.e("error main row adapter", e.getMessage());
                     }

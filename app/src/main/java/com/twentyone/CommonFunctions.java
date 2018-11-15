@@ -3,7 +3,14 @@ package com.twentyone;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.twentyone.LoginActivity.LOGIN_PREFERENCES;
 
@@ -28,4 +35,29 @@ public class CommonFunctions {
     }
 
 
+    public static String getCurrentDate(Context context) {
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        return dateFormat.format(date);
+
+    }
+
+    public static String getCustomeDate(Context context, String goalCreationDate, String totalDaysStr) {
+
+        int dayIncrement = Integer.parseInt(totalDaysStr);
+
+        String dt = goalCreationDate;  // Start date
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(dt));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DATE, dayIncrement);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+        String output = sdf1.format(c.getTime());
+        return output;
+    }
 }

@@ -70,14 +70,20 @@ public class AddGoalActivity extends AppCompatActivity {
 
             return;
         }
-        int totalDays= Integer.parseInt(totalDaysStr);
+        int totalDays = Integer.parseInt(totalDaysStr);
 
 
+        String goalCreationDate = CommonFunctions.getCurrentDate(context);
+
+        String goalEndDate = CommonFunctions.getCustomeDate(context, goalCreationDate, totalDaysStr);
         UserGoalList userGoalList = new UserGoalList();
         userGoalList.setGoal(setGoalStr);
         userGoalList.setTotalDaysOfGoal(totalDays);
         userGoalList.setName(email);
         userGoalList.setIsGoalFinished(0);
+        userGoalList.setGoalCreatedDate(goalCreationDate);
+        userGoalList.setGoalEndDate(goalEndDate);
+
 
         if (dataBaseHelper.addGoalString(userGoalList)) {
 

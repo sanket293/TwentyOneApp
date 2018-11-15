@@ -3,6 +3,22 @@ package com.twentyone;
 public class UserGoalList {
     int GoalId,IsGoalFinished,TotalDaysOfGoal;
 
+
+    String Name;
+    String GoalCreatedDate;
+
+    public String getGoalEndDate() {
+        return GoalEndDate;
+    }
+
+    public void setGoalEndDate(String goalEndDate) {
+        GoalEndDate = goalEndDate;
+    }
+
+    String GoalEndDate;
+    String Goal;
+    String GoalCompletionDays;
+
     public UserGoalList() {
     }
 
@@ -21,7 +37,14 @@ public class UserGoalList {
         Goal = goal;
     }
 
-    String Name,GoalCreatedDate;
+    public String getGoalCompletionDays() {
+        return GoalCompletionDays;
+    }
+
+    public void setGoalCompletionDays(String goalCompletionDays) {
+        GoalCompletionDays = goalCompletionDays;
+    }
+
 
     public int getIsGoalFinished() {
         return IsGoalFinished;
@@ -63,6 +86,5 @@ public class UserGoalList {
         Goal = goal;
     }
 
-    String Goal;
 
 }

@@ -31,7 +31,9 @@
 
     <string name="msg_UserSuccessfullyRegistered">User Successfully Registered</string>
     <string name="msg_GoalSuccessfully">Goal Added Successfully</string>
-    <string name="msg_GoalActionSuccessfully">Goal Action Added Successfully</string>
+    <string name="msg_DailyGoalActionAddedSuccessfully">Daily Goal Action Added Successfully</string>
+    <string name="msg_GoalActionSuccessfully">Your Goal Action Added Successfully</string>
+    <string name="msg_CongratulationsYouCompletedYourGoal">Congratulations You have Completed Your Goal</string>
 
 
     <string name="err_PasswordShouldNotdifferent">Please try again\nPassword should not be different</string>

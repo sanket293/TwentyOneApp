@@ -17,7 +17,16 @@ public class UserGoalList {
 
     String GoalEndDate;
     String Goal;
-    String GoalCompletionDays;
+
+    public int getGoalCompletionDays() {
+        return GoalCompletionDays;
+    }
+
+    public void setGoalCompletionDays(int goalCompletionDays) {
+        GoalCompletionDays = goalCompletionDays;
+    }
+
+    int GoalCompletionDays;
 
     public UserGoalList() {
     }
@@ -37,13 +46,6 @@ public class UserGoalList {
         Goal = goal;
     }
 
-    public String getGoalCompletionDays() {
-        return GoalCompletionDays;
-    }
-
-    public void setGoalCompletionDays(String goalCompletionDays) {
-        GoalCompletionDays = goalCompletionDays;
-    }
 
 
     public int getIsGoalFinished() {

@@ -14,6 +14,8 @@ public class GoalConfirmation extends AppCompatActivity {
     private int goalId = -1;
     private String name = "", goalName = "";
     private TextView tvGoalOfUser, tvGoalCompletedDays;
+    private String goalActionDate, goalEndDate = "";
+    private int totalDaysOfGoal, goalCompletionDays, isGoalFinished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,34 @@ public class GoalConfirmation extends AppCompatActivity {
         }
 
 
-//        UserGoalRecord goalRecord = dataBaseHelper.getGoalRecord(goalId);
+        UserGoalList userGoalList = dataBaseHelper.getOneGoalRecord(goalId);
 
+        if (userGoalList == null) {
+
+            redirectToGoalListActivity(getResources().getString(R.string.err_pleaseTryAgain));
+        }
+        if (isGoalFinished == CommonFunctions.IS_GOAL_FINISHED) {
+            Toast.makeText(context, getResources().getString(R.string.msg_GoalActionSuccessfully), Toast.LENGTH_SHORT).show();
+            redirectToGoalListActivity(getResources().getString(R.string.err_pleaseTryAgain));
+        }
+
+
+        goalEndDate = userGoalList.getGoalEndDate().toString();
+        goalActionDate = CommonFunctions.getCurrentDate(context);//  goal action date is same as current date
+
+        totalDaysOfGoal = userGoalList.getTotalDaysOfGoal();
+        goalCompletionDays = userGoalList.getGoalCompletionDays();
+        isGoalFinished = userGoalList.getIsGoalFinished();
+
+        tvGoalCompletedDays.setText(goalCompletionDays + "");
+
+
+    }
+
+    private void redirectToGoalListActivity(String message) {
+        Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(context, GoalListActivity.class));
+        finish();
 
     }
 
@@ -75,19 +103,27 @@ public class GoalConfirmation extends AppCompatActivity {
         if (isGoalCompleted) {
             goalAction = 1;
         }
-        String goalActionDate = CommonFunctions.getCurrentDate(context);
+
         // todo check the condition if date is null or not
+
 
         UserGoalRecord goalRecord = new UserGoalRecord(goalId, name, goalAction, goalActionDate);
 
         if (dataBaseHelper.setGoalAction(goalRecord)) {
-            if(goalAction==1) {
-       //todo          dataBaseHelper.updateGoalCompletionDays(1);
-                }
-            Toast.makeText(context, getResources().getString(R.string.msg_GoalActionSuccessfully), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(context, GoalListActivity.class));
-            finish();
+            if (goalAction == 1) {
 
+
+                boolean flag = dataBaseHelper.updateGoalCompletionDays(goalId, goalCompletionDays + 1);// this method will update completion days in UserGoalList
+                if (flag) {
+                    tvGoalCompletedDays.setText(goalCompletionDays + "");
+                    redirectToGoalListActivity(getResources().getString(R.string.msg_GoalActionSuccessfully));
+
+                } else {
+
+                    redirectToGoalListActivity(getResources().getString(R.string.err_pleaseTryAgain));
+
+                }
+            }
         } else {
             Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
         }
@@ -95,11 +131,10 @@ public class GoalConfirmation extends AppCompatActivity {
     }
 
 
-
     public void onCancelBtnClick(View view) {
+        redirectToGoalListActivity("");
 
-        startActivity(new Intent(context, GoalListActivity.class));
-        finish();
+
     }
 
 

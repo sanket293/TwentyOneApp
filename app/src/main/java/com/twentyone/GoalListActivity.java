@@ -32,7 +32,6 @@ public class GoalListActivity extends AppCompatActivity {
 
     private void findId() {
 
-
         dataBaseHelper = DataBaseHelper.getInstance(context); //  create instance of db
         lvGoalList = (ListView) findViewById(R.id.lvGoalList);
 
@@ -97,6 +96,8 @@ public class GoalListActivity extends AppCompatActivity {
 
             final String goalName=goalList.get(position).getGoal().toString();
             holder.tvTextAdapter.setText(goalName);
+
+        //todo
 
             final int goalId =goalList.get(position).getGoalId();
 

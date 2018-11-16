@@ -366,5 +366,74 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public UserGoalList getOneGoalRecord(int goalId) {
+
+        UserGoalList userGoalList = null;
+
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+            sqliteDb = instance.getWritableDatabase();
+
+
+            String query = "select * from UserGoalList where GoalId ='" + goalId + "';";
+            Log.e("search quary ", "." + query);
+
+            Cursor cursor = sqliteDb.rawQuery(query, null);
+
+            if (cursor != null) {
+
+
+//                if (cursor.isFirst()) {
+                //cursor.moveToFirst();
+
+                while (cursor.moveToNext()) {
+                    int id = cursor.getInt(cursor.getColumnIndex("GoalId"));
+                    String name = cursor.getString(cursor.getColumnIndex("Name"));
+                    String goal = cursor.getString(cursor.getColumnIndex("Goal"));
+                    String goalCreatedDate = cursor.getString(cursor.getColumnIndex("GoalCreatedDate"));
+                    int isGoalFinished = cursor.getInt(cursor.getColumnIndex("IsGoalFinished"));
+                    int totalDaysOfGoal = cursor.getInt(cursor.getColumnIndex("TotalDaysOfGoal"));
+                    int goalCompletionDays = cursor.getInt(cursor.getColumnIndex("GoalCompletionDays"));
+                    String goalEndDate = cursor.getString(cursor.getColumnIndex("GoalEndDate"));
+
+
+                    userGoalList = new UserGoalList();
+                    userGoalList.setGoalId(id);
+                    userGoalList.setName(name);
+                    userGoalList.setGoal(goal);
+                    userGoalList.setGoalCreatedDate(goalCreatedDate);
+                    userGoalList.setIsGoalFinished(isGoalFinished);
+                    userGoalList.setTotalDaysOfGoal(totalDaysOfGoal);
+                    userGoalList.setGoalCompletionDays(goalCompletionDays);
+                    userGoalList.setGoalEndDate(goalEndDate);
+
+                }
+                cursor.close();
+            } else {
+                Log.e("error in db", "cursor is null at goallist function");
+            }
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return userGoalList;
+
+    }
+
+    public boolean updateGoalCompletionDays(int goalId, int goalCompletionDay) {
+        try {
+            String query = "UPDATE UserGoalList SET GoalCompletionDays = '" + goalCompletionDay + "' WHERE GoalId = '" + goalId + "' ";
+            sqliteDb.execSQL(query);
+
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
 

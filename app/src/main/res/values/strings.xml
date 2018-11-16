@@ -39,6 +39,8 @@
     <string name="err_PasswordShouldNotdifferent">Please try again\nPassword should not be different</string>
     <string name="err_credentialisnotmatching">Please try again\nCredential is not correct</string>
     <string name="err_pleaseTryAgain">Please try again</string>
+    <string name="err_youAlreadyFinishedYourGoal">you Already Finished Your This Goal</string>
+    <string name="err_youAlreadyAetActionForYourGoal">you Already Set Action For This Goal</string>
     <string name="err_enter_your_name">Please Enter Your Name</string>
     <string name="err_enter_your_email">Please Enter Your Email</string>
     <string name="err_enter_your_phone">Please Enter Your Phone</string>

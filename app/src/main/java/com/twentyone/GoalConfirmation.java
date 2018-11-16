@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class GoalConfirmation extends AppCompatActivity {
     private DataBaseHelper dataBaseHelper;
@@ -16,6 +19,7 @@ public class GoalConfirmation extends AppCompatActivity {
     private TextView tvGoalOfUser, tvGoalCompletedDays;
     private String goalActionDate, goalEndDate = "";
     private int totalDaysOfGoal, goalCompletionDays, isGoalFinished;
+    private boolean isVotedToDay = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +27,6 @@ public class GoalConfirmation extends AppCompatActivity {
         setContentView(R.layout.activity_goal_confirmation);
 
         findId();
-
-
     }
 
     private void findId() {
@@ -56,14 +58,13 @@ public class GoalConfirmation extends AppCompatActivity {
 
 
         UserGoalList userGoalList = dataBaseHelper.getOneGoalRecord(goalId);
-
         if (userGoalList == null) {
-
             redirectToGoalListActivity(getResources().getString(R.string.err_pleaseTryAgain));
         }
+
         if (isGoalFinished == CommonFunctions.IS_GOAL_FINISHED) {
             Toast.makeText(context, getResources().getString(R.string.msg_GoalActionSuccessfully), Toast.LENGTH_SHORT).show();
-            redirectToGoalListActivity(getResources().getString(R.string.err_pleaseTryAgain));
+            redirectToGoalListActivity(getResources().getString(R.string.err_youAlreadyFinishedYourGoal));
         }
 
 
@@ -76,11 +77,13 @@ public class GoalConfirmation extends AppCompatActivity {
 
         tvGoalCompletedDays.setText(goalCompletionDays + "");
 
+        isVotedToDay = isVoted();
+
 
     }
 
     private void redirectToGoalListActivity(String message) {
-        Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "." + message, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(context, GoalListActivity.class));
         finish();
 
@@ -89,11 +92,47 @@ public class GoalConfirmation extends AppCompatActivity {
 
     public void onYesBtnClick(View view) {
 
-        didUserFinishedGoal(true);
+//        if (!isVoted()) { // allows to set goal action only if user has not voted
+        if (!isVotedToDay) { // allows to set goal action only if user has not voted
+
+            didUserFinishedGoal(true);
+        }
     }
 
     public void onNoBtnClick(View view) {
-        didUserFinishedGoal(false);
+        //      if (!isVoted()) { // allows to set goal action only if user has not voted
+        if (!isVotedToDay) { // allows to set goal action only if user has not voted
+
+
+            didUserFinishedGoal(false);
+        }
+    }
+
+    private boolean isVoted() {
+
+        try {
+
+            List<Integer> goalIdList = dataBaseHelper.isVotedOnGoalActionDate(goalActionDate); // goal action date means today's date i.e when user click yes/no button
+            if (goalIdList != null) {
+                if (goalIdList.size() > 0) { // if didnt find any record
+                    for (int i = 0; i < goalIdList.size(); i++) {
+                        if (goalIdList.get(i).equals(goalId)) { // checks the entry for current goalid with all id
+                            isVotedToDay = true;
+                            Toast.makeText(context, getResources().getString(R.string.err_youAlreadyAetActionForYourGoal), Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+                }
+            } else {
+                isVotedToDay = false;
+            }
+
+        } catch (Exception e) {
+            Log.e("err isvoted fn", e.getMessage());
+            redirectToGoalListActivity(getResources().getString(R.string.err_pleaseTryAgain));
+        }
+
+        return isVotedToDay;
     }
 
     // after pressing yes or no button, this method will invoke
@@ -110,24 +149,23 @@ public class GoalConfirmation extends AppCompatActivity {
         UserGoalRecord goalRecord = new UserGoalRecord(goalId, name, goalAction, goalActionDate);
 
         if (dataBaseHelper.setGoalAction(goalRecord)) {
+            isVotedToDay = true; // if user press yes or no it will not allow him to vote again
+
             if (goalAction == 1) {
-
-
                 boolean flag = dataBaseHelper.updateGoalCompletionDays(goalId, goalCompletionDays + 1);// this method will update completion days in UserGoalList
                 if (flag) {
                     tvGoalCompletedDays.setText(goalCompletionDays + "");
+                    // todo m update goal finished flag
                     redirectToGoalListActivity(getResources().getString(R.string.msg_GoalActionSuccessfully));
-
-                } else {
+                } else { // if any err comes --> redirect to main activity
 
                     redirectToGoalListActivity(getResources().getString(R.string.err_pleaseTryAgain));
-
                 }
+
             }
         } else {
             Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
         }
-
     }
 
 

@@ -262,6 +262,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+
+    //////////  UPDATE
+
+    public boolean updateGoalCompletionDays(int goalId, int goalCompletionDay) {
+        try {
+            String query = "UPDATE UserGoalList SET GoalCompletionDays = '" + goalCompletionDay + "' WHERE GoalId = '" + goalId + "' ";
+            sqliteDb.execSQL(query);
+
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+
     ////////    SELECT
     public static UserFields checkCredentials(String email, String password) {
 
@@ -272,8 +289,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
             sqliteDb = instance.getWritableDatabase();
 
-            String query = "select * from User where  Email=" + email + " and password=" + password + ";";
-
+            String query = "select * from User where  Email='" + email + "' and password='" + password + "';";
+Log.e("lgoin search query","."+query);
             Cursor cursor = sqliteDb.rawQuery(query, null);
 
             if (cursor != null) {
@@ -423,17 +440,50 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean updateGoalCompletionDays(int goalId, int goalCompletionDay) {
-        try {
-            String query = "UPDATE UserGoalList SET GoalCompletionDays = '" + goalCompletionDay + "' WHERE GoalId = '" + goalId + "' ";
-            sqliteDb.execSQL(query);
+    public List<Integer> isVotedOnGoalActionDate(String goalActionDate) {
 
+        List<Integer> goalIdList = null;
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+            sqliteDb = instance.getWritableDatabase();
+
+            String query = "select GoalId from UserGoalRecord where GoalActionDate ='" + goalActionDate + "';";
+            Log.e("getting id from date quary ", "." + query);
+
+            Cursor cursor = sqliteDb.rawQuery(query, null);
+
+            if (cursor.getCount() == 0) {
+
+                cursor.close();
+                return goalIdList;
+            } else {
+                goalIdList = new ArrayList<>();
+            }
+
+
+            if (cursor != null) {
+
+
+                while (cursor.moveToNext()) {
+                    if (cursor.moveToFirst()) {
+                        int id = cursor.getInt(cursor.getColumnIndex("GoalId"));
+                        goalIdList.add(id);
+                    }
+                }
+
+
+                cursor.close();
+            } else {
+                Log.e("error in db", "cursor is null at goallist function");
+            }
         } catch (Exception e) {
             System.out.println("DB ERROR  " + e.getMessage());
             e.printStackTrace();
-            return false;
         }
-        return true;
+
+        return goalIdList;
+
     }
 }
-

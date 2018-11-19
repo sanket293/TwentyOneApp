@@ -27,7 +27,10 @@
         <activity android:name=".GoalConfirmation" />
         <activity android:name=".InstructionsActivity" />
         <activity android:name=".GoalListActivity" />
-        <activity android:name=".AddGoalActivity"></activity>
+        <activity android:name=".AddGoalActivity" />
+        <activity android:name=".UserRecordsActivity" />
+        <activity android:name=".AdminAddQuotesActivity" />
+        <activity android:name=".AdminQuoteDeleteActivity"></activity>
     </application>
 
 </manifest>

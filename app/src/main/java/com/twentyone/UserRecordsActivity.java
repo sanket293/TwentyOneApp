@@ -18,64 +18,52 @@ import java.util.List;
 
 import static com.twentyone.CommonFunctions.getUserName;
 
-public class GoalListActivity extends AppCompatActivity {
+public class UserRecordsActivity extends AppCompatActivity {
+
+    private ListView lvUserGoalRecords;
     private DataBaseHelper dataBaseHelper;
-    private Context context = GoalListActivity.this;
-    private ListView lvGoalList;
+    private Context context = UserRecordsActivity.this;
     private String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goal_list);
+        setContentView(R.layout.activity_user_records);
         findId();
     }
 
     private void findId() {
-
         dataBaseHelper = DataBaseHelper.getInstance(context); //  create instance of db
-        lvGoalList = (ListView) findViewById(R.id.lvGoalList);
+        lvUserGoalRecords = (ListView) findViewById(R.id.lvUserGoalRecords);
 
         email = getUserName(context);
-        List<UserGoalList> goalList = dataBaseHelper.getGoalList(email);
+//        List<UserGoalList> goalList = dataBaseHelper.getGoalList(email);
+        List<UserGoalList> goalList = dataBaseHelper.getAllGoalRecordsList(email);
 
         if (goalList.size() > 0) {
             ListviewAdapter listviewAdapter = new ListviewAdapter(goalList);
-            lvGoalList.setAdapter(listviewAdapter);
+            lvUserGoalRecords.setAdapter(listviewAdapter);
         } else {
             Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
-
             startActivity(new Intent(context, LoginActivity.class));
             finish();
-
         }
-
-
-    }
-
-    public void onAddNewGoal(View view) {
-        startActivity(new Intent(context, AddGoalActivity.class));
-        finish();
-    }
-
-    public void onViewRecords(View view) {
-        startActivity(new Intent(context, UserRecordsActivity.class));
-        finish();
     }
 
 
     public class ListviewAdapter extends BaseAdapter {
 
-        private List<UserGoalList> goalList = new ArrayList<>();
+        private List<UserGoalList> goalRecordsList = new ArrayList<>();
+
 
         public ListviewAdapter(List<UserGoalList> goalList) {
-            this.goalList = goalList;
+            this.goalRecordsList = goalList;
         }
 
 
         @Override
         public int getCount() {
-            return goalList.size();
+            return goalRecordsList.size();
         }
 
         @Override
@@ -90,16 +78,21 @@ public class GoalListActivity extends AppCompatActivity {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            final ViewHolder holder;
+            ViewHolder holder;
 
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             if (convertView == null) {
                 holder = new ViewHolder();
 
-                convertView = inflater.inflate(R.layout.simple_text_adapter, parent, false);
+                convertView = inflater.inflate(R.layout.user_records_adapter, parent, false);
 
                 holder.tvTextAdapter = (TextView) convertView.findViewById(R.id.tvTextAdapter);
+                holder.tvGoalStartDate = (TextView) convertView.findViewById(R.id.tvGoalStartDate);
+                holder.tvGoalEndDate = (TextView) convertView.findViewById(R.id.tvGoalEndDate);
+                holder.tvTotalGoalCompletionDay = (TextView) convertView.findViewById(R.id.tvTotalGoalCompletionDay);
+                holder.tvTotalDaysOfGoal = (TextView) convertView.findViewById(R.id.tvTotalDaysOfGoal);
+                holder.tvGoalName = (TextView) convertView.findViewById(R.id.tvGoalName);
 
 
                 convertView.setTag(holder);
@@ -107,12 +100,26 @@ public class GoalListActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            final String goalName = goalList.get(position).getGoal().toString();
-            holder.tvTextAdapter.setText(goalName);
 
-            //todo
+// todo fill all texview
 
-            final int goalId = goalList.get(position).getGoalId();
+            final String goalName = goalRecordsList.get(position).getGoal().toString();
+
+            String goalStartDate = goalRecordsList.get(position).getGoalCreatedDate().toString();
+            String goalEndDate = goalRecordsList.get(position).getGoalEndDate().toString();
+            int goalCompletionDays = goalRecordsList.get(position).getGoalCompletionDays();
+            int totalDaysOfGoal = goalRecordsList.get(position).getTotalDaysOfGoal();
+
+
+            holder.tvGoalName.setText(goalName);
+            holder.tvGoalStartDate.setText(goalStartDate);
+            holder.tvGoalEndDate.setText(goalEndDate);
+            holder.tvTotalGoalCompletionDay.setText("" + goalCompletionDays);
+            holder.tvTotalDaysOfGoal.setText("" + totalDaysOfGoal);
+
+
+            final int goalId = goalRecordsList.get(position).getGoalId();
+
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,8 +137,8 @@ public class GoalListActivity extends AppCompatActivity {
     }
 
     public class ViewHolder {
-        TextView tvTextAdapter;
-    }
+        TextView tvTextAdapter, tvGoalEndDate, tvGoalStartDate, tvTotalGoalCompletionDay, tvTotalDaysOfGoal, tvGoalName;
 
+    }
 
 }

@@ -38,6 +38,7 @@ public class GoalConfirmation extends AppCompatActivity {
         name = CommonFunctions.getUserName(context);
 
         if (goalId == -1) { // if it's -1 , something wrong happened
+            Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(GoalConfirmation.this, GoalListActivity.class));
             finish();
         }

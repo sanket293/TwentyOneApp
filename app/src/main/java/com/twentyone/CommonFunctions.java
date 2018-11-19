@@ -17,7 +17,12 @@ import static com.twentyone.LoginActivity.LOGIN_PREFERENCES;
 public class CommonFunctions {
     public static SharedPreferences sharedpreferences;
     public static String email = "";
-public static int IS_GOAL_FINISHED=1;
+    public static int IS_GOAL_FINISHED = 1;
+    public static  String ADMIN_EMAIL="admin";
+    public static  String ADMIN_PASSWORD="admin";
+
+
+
     public static String getUserName(Context context) {
         sharedpreferences = context.getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -30,7 +35,7 @@ public static int IS_GOAL_FINISHED=1;
         }
 
         return email;
-        }
+    }
 
 
     public static String getCurrentDate(Context context) {

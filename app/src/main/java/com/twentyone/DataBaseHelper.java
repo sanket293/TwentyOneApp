@@ -290,7 +290,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             sqliteDb = instance.getWritableDatabase();
 
             String query = "select * from User where  Email='" + email + "' and password='" + password + "';";
-Log.e("lgoin search query","."+query);
+            Log.e("lgoin search query", "." + query);
             Cursor cursor = sqliteDb.rawQuery(query, null);
 
             if (cursor != null) {
@@ -321,10 +321,8 @@ Log.e("lgoin search query","."+query);
 
     }
 
-
     public List<UserGoalList> getGoalList(String email) {
-//        List<String> goalList = new ArrayList<>();
-        //    ArrayList<String> goalList = new ArrayList<>();
+
         ArrayList<UserGoalList> goalList = new ArrayList<>();
 
         try {
@@ -375,12 +373,6 @@ Log.e("lgoin search query","."+query);
         }
         return goalList;
 
-    }
-
-    public UserGoalRecord getGoalRecord(int goalId) {
-
-
-        return null;
     }
 
     public UserGoalList getOneGoalRecord(int goalId) {
@@ -486,4 +478,100 @@ Log.e("lgoin search query","."+query);
         return goalIdList;
 
     }
+
+    public List<UserGoalList> getAllGoalRecordsList(String email) {
+
+        List<UserGoalList> userGoalRecordList = null;
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+            sqliteDb = instance.getWritableDatabase();
+
+            String query = "select * from UserGoalList where Name ='" + email + "';";
+            Log.e("getting user goal records from date query ", "." + query);
+
+            Cursor cursor = sqliteDb.rawQuery(query, null);
+
+            if (cursor.getCount() == 0) {
+
+                cursor.close();
+                return userGoalRecordList;
+            } else {
+                userGoalRecordList = new ArrayList<>();
+            }
+
+
+            if (cursor != null) {
+
+
+                while (cursor.moveToNext()) {
+                    if (cursor.moveToFirst()) {
+
+                        int goalId = cursor.getInt(cursor.getColumnIndex("GoalId"));
+
+                        String emailStr = cursor.getString(cursor.getColumnIndex("Name"));
+                        String goal = cursor.getString(cursor.getColumnIndex("Goal"));
+                        String goalCreatedDate = cursor.getString(cursor.getColumnIndex("GoalCreatedDate"));
+                        int isGoalFinished = cursor.getInt(cursor.getColumnIndex("IsGoalFinished"));
+                        int goalCompletionDays = cursor.getInt(cursor.getColumnIndex("GoalCompletionDays"));
+                        int totalDaysOfGoal = cursor.getInt(cursor.getColumnIndex("TotalDaysOfGoal"));
+                        String goalEndDate = cursor.getString(cursor.getColumnIndex("GoalEndDate"));
+
+
+                        UserGoalList userGoalList = new UserGoalList();
+                        userGoalList.setGoalId(goalId);
+                        userGoalList.setName(emailStr);
+                        userGoalList.setGoal(goal);
+                        userGoalList.setGoalCreatedDate(goalCreatedDate);
+                        userGoalList.setIsGoalFinished(isGoalFinished);
+                        userGoalList.setGoalCompletionDays(goalCompletionDays);
+                        userGoalList.setTotalDaysOfGoal(totalDaysOfGoal);
+                        userGoalList.setGoalEndDate(goalEndDate);
+
+
+
+
+
+                        userGoalRecordList.add(userGoalList); //add the item
+                        cursor.moveToNext();
+
+                    }
+                }
+
+
+                cursor.close();
+            } else {
+                Log.e("error in db", "cursor is null at goallist function");
+            }
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return userGoalRecordList;
+
+
+    }
+
+
+
+
+
+    public boolean addQuoteString(String quoteStr) {
+        return false;
+    }
+
+    public List<Quotes> getQuotes() {
+        return null;
+    }
+
+    public boolean updateQuotes(int quoteId) {
+        return false;
+    }
+
+    public boolean deleteQuotes(int quoteId) {
+        return false;
+    }
+
 }

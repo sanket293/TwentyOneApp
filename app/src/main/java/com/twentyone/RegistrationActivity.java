@@ -81,9 +81,14 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
+        int phone=0;
+        try {
+             phone = Integer.parseInt(phoneStr);
+        } catch (Exception e) {
+            Log.e("exc", "."+e);
+        }
 
 
-        int phone = Integer.parseInt(phoneStr);
         UserFields user = new UserFields(name, password, email, phone, 1);  // passing parameter 1> user object, 2. User role 1 for user and 0 for admin
 
         if (dataBaseHelper.addRegistrationDetails(user)) {

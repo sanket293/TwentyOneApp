@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
+
         if (email.equalsIgnoreCase("")) {
 
             Toast.makeText(context, getResources().getString(R.string.err_enter_your_email), Toast.LENGTH_SHORT).show();
@@ -54,31 +55,35 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
+        if (email.equalsIgnoreCase(CommonFunctions.ADMIN_EMAIL) && password.equalsIgnoreCase(CommonFunctions.ADMIN_PASSWORD)) {
+            startActivity(new Intent(context, AdminAddQuotesActivity.class));
+            finish();
+        }
+
+
+        // checks only for users not for admin
+
         UserFields user = dataBaseHelper.checkCredentials(email, password);
         if (user != null) {
-            if(user.equals(null))
-
-            {
+            if (user.equals(null)) {
                 Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
                 return;
-
             }
             try {
-                sharedpreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
 
+                sharedpreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
-                //   Gson gson = new Gson();
-                //   String json = gson.toJson(user);
-                //  editor.putString(USER_OBJECT_KEY, json);
-
-                if (!user.getEmail().equalsIgnoreCase("")) {
+                // stores only for users not for admin
+                if (!user.getEmail().equalsIgnoreCase("") || !user.getEmail().equalsIgnoreCase(CommonFunctions.ADMIN_EMAIL)) {
                     editor.putString(USERNAME_KEY, user.getEmail());
                 } else {
                     Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 editor.commit();
+
+
             } catch (Exception e) {
                 Log.e("login btn click error", e.getMessage());
                 Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
@@ -86,9 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             } finally {
                 startActivity(new Intent(LoginActivity.this, GoalListActivity.class));
                 finish();
-
             }
-
         } else {
             Toast.makeText(context, getResources().getString(R.string.err_credentialisnotmatching), Toast.LENGTH_SHORT).show();
         }

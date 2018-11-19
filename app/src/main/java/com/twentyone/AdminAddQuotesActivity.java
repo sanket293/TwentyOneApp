@@ -16,66 +16,76 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.twentyone.CommonFunctions.getUserName;
+public class AdminAddQuotesActivity extends AppCompatActivity {
 
-public class GoalListActivity extends AppCompatActivity {
     private DataBaseHelper dataBaseHelper;
-    private Context context = GoalListActivity.this;
-    private ListView lvGoalList;
-    private String email = "";
+    private Context context = AdminAddQuotesActivity.this;
+
+    private TextView etAddNewQuotes;
+    private ListView lvQuotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goal_list);
+        setContentView(R.layout.activity_admin_add_quotes);
+
         findId();
     }
 
     private void findId() {
-
         dataBaseHelper = DataBaseHelper.getInstance(context); //  create instance of db
-        lvGoalList = (ListView) findViewById(R.id.lvGoalList);
 
-        email = getUserName(context);
-        List<UserGoalList> goalList = dataBaseHelper.getGoalList(email);
+        etAddNewQuotes = (TextView) findViewById(R.id.etAddNewQuotes);
+        lvQuotes = (ListView) findViewById(R.id.lvQuotes);
+    }
 
-        if (goalList.size() > 0) {
-            ListviewAdapter listviewAdapter = new ListviewAdapter(goalList);
-            lvGoalList.setAdapter(listviewAdapter);
-        } else {
-            Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
+    public void onAddNewQuotesBtnClick(View view) {
 
-            startActivity(new Intent(context, LoginActivity.class));
-            finish();
+        String quoteStr = etAddNewQuotes.getText().toString().trim();
 
+        if (quoteStr.equalsIgnoreCase("")) {
+            Toast.makeText(context, getResources().getString(R.string.err_PleaseAddQuote)
+                    , Toast.LENGTH_SHORT).show();
+            return;
         }
 
 
+        if (dataBaseHelper.addQuoteString(quoteStr)) {
+
+
+            Toast.makeText(context, getResources().getString(R.string.msg_GoalSuccessfully)
+                    , Toast.LENGTH_SHORT).show();
+
+            List<Quotes> quoteList = dataBaseHelper.getQuotes();
+
+            ListviewAdapter listviewAdapter = new ListviewAdapter(quoteList);
+            lvQuotes.setAdapter(listviewAdapter);
+
+        } else {
+
+            Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain)
+                    , Toast.LENGTH_SHORT).show();
+        }
+
     }
 
-    public void onAddNewGoal(View view) {
-        startActivity(new Intent(context, AddGoalActivity.class));
-        finish();
-    }
-
-    public void onViewRecords(View view) {
-        startActivity(new Intent(context, UserRecordsActivity.class));
-        finish();
+    public void onCancelbtnClick(View view) {
+        etAddNewQuotes.setText("");
     }
 
 
     public class ListviewAdapter extends BaseAdapter {
 
-        private List<UserGoalList> goalList = new ArrayList<>();
+        private List<Quotes> quoteList = new ArrayList<>();
 
-        public ListviewAdapter(List<UserGoalList> goalList) {
-            this.goalList = goalList;
+        public ListviewAdapter(List<Quotes> quoteList) {
+            this.quoteList = quoteList;
         }
 
 
         @Override
         public int getCount() {
-            return goalList.size();
+            return quoteList.size();
         }
 
         @Override
@@ -107,18 +117,17 @@ public class GoalListActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            final String goalName = goalList.get(position).getGoal().toString();
-            holder.tvTextAdapter.setText(goalName);
+            String quoteName = quoteList.get(position).getQuotes().toString();
+            final int quoteId = quoteList.get(position).getQuotesId();
 
-            //todo
+            holder.tvTextAdapter.setText(quoteName);
 
-            final int goalId = goalList.get(position).getGoalId();
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        startActivity(new Intent(context, GoalConfirmation.class).putExtra("goalId", goalId).putExtra("goalName", goalName));
+                        startActivity(new Intent(context, AdminQuoteDeleteActivity.class).putExtra("quoteId", quoteId));
                     } catch (Exception e) {
                         Log.e("error main row adapter", e.getMessage());
                     }

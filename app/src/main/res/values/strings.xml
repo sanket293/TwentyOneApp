@@ -18,6 +18,7 @@
     <string name="Phone_number">Phone Number</string>
     <string name="Phone">Phone</string>
     <string name="AddGoal">Add Goal</string>
+    <string name="ViewGoalRecords">Show Goal Records</string>
     <string name="SetYourHabitOrGoal">Set Your Habit Or Goal</string>
     <string name="EnterYourGoal">Enter Your Goal</string>
     <string name="SetGoal">Set Goal</string>
@@ -26,11 +27,21 @@
     <string name="PleaseSelect">Please Select</string>
     <string name="DidYouCompletedYourGoal">Did You Complete Your Goal?</string>
     <string name="TotalDaysYouCompleted">Total Days You Completed</string>
+    <string name="TotalDaysRemaining">Total Days Remaining</string>
+    <string name="TotalDaysOfGoal">Total Days Of Your Goal</string>
+    <string name="GoalStartingDate">Goal Started Date</string>
+    <string name="GoalEndDate">Goal End Date</string>
+    <string name="AddNewQuotes">Add New Quotes</string>
+    <string name="UpdateQuotes">Update Quotes</string>
+    <string name="DeleteQuotes">Delete Quotes</string>
     <string name="HowManyDaysYouNeedToCompleteGoal">How Many Days You Need To Complete This Goal ?</string>
 
 
     <string name="msg_UserSuccessfullyRegistered">User Successfully Registered</string>
     <string name="msg_GoalSuccessfully">Goal Added Successfully</string>
+    <string name="msg_QuoteSuccessfully">Quote Added Successfully</string>
+    <string name="msg_QuoteUpdatedSuccessfully">Quote Updated Successfully</string>
+    <string name="msg_QuoteDeletedSuccessfully">Quote Deleted Successfully</string>
     <string name="msg_DailyGoalActionAddedSuccessfully">Daily Goal Action Added Successfully</string>
     <string name="msg_GoalActionSuccessfully">Your Goal Action Added Successfully</string>
     <string name="msg_CongratulationsYouCompletedYourGoal">Congratulations You have Completed Your Goal</string>
@@ -47,6 +58,7 @@
     <string name="err_enter_your_password">Please Enter Your Password</string>
     <string name="err_enter_your_confirm_password">Please Enter Your Confirm Password</string>
     <string name="err_PleaseAddGoal">Please Enter Your Goal</string>
+    <string name="err_PleaseAddQuote">Please Enter Your Quote</string>
     <string name="err_PleaseAddDays">Please Enter How Many Days You Need To Complete Your Goal</string>
 
 

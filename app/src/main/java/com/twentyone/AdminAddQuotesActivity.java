@@ -37,6 +37,9 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
 
         etAddNewQuotes = (TextView) findViewById(R.id.etAddNewQuotes);
         lvQuotes = (ListView) findViewById(R.id.lvQuotes);
+
+       fillQuoteListView();
+
     }
 
     public void onAddNewQuotesBtnClick(View view) {
@@ -53,13 +56,11 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
         if (dataBaseHelper.addQuoteString(quoteStr)) {
 
 
-            Toast.makeText(context, getResources().getString(R.string.msg_GoalSuccessfully)
+            Toast.makeText(context, getResources().getString(R.string.msg_QuoteaddedSuccessfully)
                     , Toast.LENGTH_SHORT).show();
 
-            List<Quotes> quoteList = dataBaseHelper.getQuotes();
+    //    fillQuoteListView();
 
-            ListviewAdapter listviewAdapter = new ListviewAdapter(quoteList);
-            lvQuotes.setAdapter(listviewAdapter);
 
         } else {
 
@@ -69,8 +70,25 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
 
     }
 
+    private void fillQuoteListView() {
+        List<Quotes> quoteList = dataBaseHelper.getQuotes();
+        ListviewAdapter listviewAdapter = new ListviewAdapter(quoteList);
+
+        if (quoteList != null) {
+            lvQuotes.setAdapter(listviewAdapter);
+
+        } else {
+            Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void onCancelbtnClick(View view) {
         etAddNewQuotes.setText("");
+    }
+    public void onRefreshBtnClick(View view) {
+        etAddNewQuotes.setText("");
+
+        fillQuoteListView();
     }
 
 
@@ -117,7 +135,7 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            String quoteName = quoteList.get(position).getQuotes().toString();
+            final String quoteName = quoteList.get(position).getQuotes().toString();
             final int quoteId = quoteList.get(position).getQuotesId();
 
             holder.tvTextAdapter.setText(quoteName);
@@ -127,7 +145,7 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     try {
-                        startActivity(new Intent(context, AdminQuoteDeleteActivity.class).putExtra("quoteId", quoteId));
+                        startActivity(new Intent(context, AdminQuoteDeleteActivity.class).putExtra("quoteId", quoteId).putExtra("quoteName",quoteName));
                     } catch (Exception e) {
                         Log.e("error main row adapter", e.getMessage());
                     }

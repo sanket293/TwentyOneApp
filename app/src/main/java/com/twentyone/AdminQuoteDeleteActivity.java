@@ -34,10 +34,13 @@ public class AdminQuoteDeleteActivity extends AppCompatActivity {
         quoteId =
                 intent.getIntExtra("quoteId", -1);
 
+
+        String quoteName = intent.getStringExtra("quoteName");
         if (quoteId == -1) { // if it's -1 , something wrong happened
 
             redirectToBackActivity(getResources().getString(R.string.err_pleaseTryAgain));
         }
+        etQuoteChange.setText(quoteName);
         quote = etQuoteChange.getText().toString();
 
 
@@ -46,7 +49,7 @@ public class AdminQuoteDeleteActivity extends AppCompatActivity {
 
     public void onUpdateQuotesBtnClick(View view) {
         if (isValidQuoteString()) {
-            if (dataBaseHelper.updateQuotes(quoteId)) {
+            if (dataBaseHelper.updateQuotes(quoteId, quote)) {
 
                 redirectToBackActivity(getResources().getString(R.string.msg_QuoteUpdatedSuccessfully));
             } else {

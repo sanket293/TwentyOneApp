@@ -24,7 +24,7 @@
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-android:text="1"            android:layout_weight="1"
+android:text="admin"            android:layout_weight="1"
             android:hint="@string/Email" />
 
     </LinearLayout>
@@ -44,7 +44,8 @@ android:text="1"            android:layout_weight="1"
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:text="1"            android:layout_height="wrap_content"
+            android:text="admin"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/Password"
             android:inputType="textPassword"

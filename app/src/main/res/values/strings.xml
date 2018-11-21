@@ -44,6 +44,7 @@
     <string name="msg_QuoteDeletedSuccessfully">Quote Deleted Successfully</string>
     <string name="msg_DailyGoalActionAddedSuccessfully">Daily Goal Action Added Successfully</string>
     <string name="msg_GoalActionSuccessfully">Your Goal Action Added Successfully</string>
+    <string name="msg_QuoteaddedSuccessfully">Quote Added Successfully</string>
     <string name="msg_CongratulationsYouCompletedYourGoal">Congratulations You have Completed Your Goal</string>
 
 

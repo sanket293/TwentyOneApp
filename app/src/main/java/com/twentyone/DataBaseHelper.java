@@ -159,6 +159,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // User Define Functions
 
+    //////// INSERT
+
     //Enter User registration
     public static boolean addRegistrationDetails(UserFields user) {
         try {
@@ -262,7 +264,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean addQuoteString(String quoteStr) {
 
+        if (quoteStr.equalsIgnoreCase("")) {
+            return false;
+        }
+
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+
+
+            String query = "insert into Quotes(quotes) values('" + quoteStr + "');";
+
+            Log.e("admin add quotestring", "." + query);
+
+            sqliteDb = instance.getWritableDatabase();
+            sqliteDb.execSQL(query);
+
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
     //////////  UPDATE
 
     public boolean updateGoalCompletionDays(int goalId, int goalCompletionDay) {
@@ -530,9 +558,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         userGoalList.setGoalEndDate(goalEndDate);
 
 
-
-
-
                         userGoalRecordList.add(userGoalList); //add the item
                         cursor.moveToNext();
 
@@ -555,23 +580,85 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+//    Quotes
+//    quotesId
 
-
-
-    public boolean addQuoteString(String quoteStr) {
-        return false;
-    }
 
     public List<Quotes> getQuotes() {
-        return null;
+
+        List<Quotes> quotesList = null;
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+            sqliteDb = instance.getWritableDatabase();
+
+            String query = "select * from Quotes;";
+            Log.e("getting all quotes query ", "." + query);
+
+            Cursor cursor = sqliteDb.rawQuery(query, null);
+
+            if (cursor.getCount() == 0) {
+
+                cursor.close();
+                return quotesList;
+            } else {
+                quotesList = new ArrayList<>();
+            }
+
+
+            if (cursor != null) {
+
+
+                cursor.moveToFirst();
+                while (!cursor.isLast()) {
+                    if (cursor.getCount() == quotesList.size()) {
+                        break;
+                    }
+                    int quotesId = cursor.getInt(cursor.getColumnIndex("quotesId"));
+                    String quotesStr = cursor.getString(cursor.getColumnIndex("quotes"));
+
+                    Quotes quotes = new Quotes(quotesId, quotesStr);
+                    quotesList.add(quotes);
+
+                }
+
+                cursor.close();
+            } else {
+                Log.e("error in db", "cursor is null at getquotes function");
+            }
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+        }
+        return quotesList;
     }
 
-    public boolean updateQuotes(int quoteId) {
-        return false;
+    public boolean updateQuotes(int quoteId, String quotes) {
+        try {
+            String query = "UPDATE Quotes SET quotes = '" + quotes + "' WHERE quoteId = '" + quoteId + "' ";
+            sqliteDb.execSQL(query);
+
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public boolean deleteQuotes(int quoteId) {
-        return false;
-    }
+        try {
 
+            String query = "delete from Quotes where quotesId ='" + quoteId + "';";
+//            String query = "DELETE Quotes SET quotes = '" + quotes+ "' WHERE quoteId = '" + quoteId + "' ";
+            sqliteDb.execSQL(query);
+
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

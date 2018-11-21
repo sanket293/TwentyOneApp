@@ -42,15 +42,7 @@ public class GoalListActivity extends AppCompatActivity {
         if (goalList.size() > 0) {
             ListviewAdapter listviewAdapter = new ListviewAdapter(goalList);
             lvGoalList.setAdapter(listviewAdapter);
-        } else {
-            Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(context, LoginActivity.class));
-            finish();
-
         }
-
-
     }
 
     public void onAddNewGoal(View view) {

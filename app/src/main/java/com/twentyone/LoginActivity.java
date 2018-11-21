@@ -54,46 +54,46 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-
         if (email.equalsIgnoreCase(CommonFunctions.ADMIN_EMAIL) && password.equalsIgnoreCase(CommonFunctions.ADMIN_PASSWORD)) {
             startActivity(new Intent(context, AdminAddQuotesActivity.class));
             finish();
-        }
+            return;
+        } else {
 
+            // checks only for users not for admin
+            UserFields user = dataBaseHelper.checkCredentials(email, password);
 
-        // checks only for users not for admin
-
-        UserFields user = dataBaseHelper.checkCredentials(email, password);
-        if (user != null) {
-            if (user.equals(null)) {
-                Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
-                return;
-            }
-            try {
-
-                sharedpreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-
-                // stores only for users not for admin
-                if (!user.getEmail().equalsIgnoreCase("") || !user.getEmail().equalsIgnoreCase(CommonFunctions.ADMIN_EMAIL)) {
-                    editor.putString(USERNAME_KEY, user.getEmail());
-                } else {
+            if (user != null) {
+                if (user.equals(null)) {
                     Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                editor.commit();
+
+                try {
+                    sharedpreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                    // stores only for users not for admin
+                    if (!user.getEmail().equalsIgnoreCase("") || !user.getEmail().equalsIgnoreCase(CommonFunctions.ADMIN_EMAIL)) {
+                        editor.putString(USERNAME_KEY, user.getEmail());
+                    } else {
+                        Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    editor.commit();
 
 
-            } catch (Exception e) {
-                Log.e("login btn click error", e.getMessage());
-                Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
-                return;
-            } finally {
-                startActivity(new Intent(LoginActivity.this, GoalListActivity.class));
-                finish();
+                } catch (Exception e) {
+                    Log.e("login btn click error", e.getMessage());
+                    Toast.makeText(context, getResources().getString(R.string.err_pleaseTryAgain), Toast.LENGTH_SHORT).show();
+                    return;
+                } finally {
+                    startActivity(new Intent(LoginActivity.this, GoalListActivity.class));
+                    finish();
+                }
+            } else {
+                Toast.makeText(context, getResources().getString(R.string.err_credentialisnotmatching), Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(context, getResources().getString(R.string.err_credentialisnotmatching), Toast.LENGTH_SHORT).show();
         }
     }
 

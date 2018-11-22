@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/common_application_margin"
+    android:orientation="vertical"
     tools:context=".UserRecordsActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/YourGoalRecords"
+        android:textSize="@dimen/twenty_two_sp" />
 
     <ListView
-        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/ten_dp"
         android:id="@+id/lvUserGoalRecords"
-        android:layout_height="match_parent"></ListView>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></ListView>
 
 
 </LinearLayout>

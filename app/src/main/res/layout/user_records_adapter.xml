@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_margin="@dimen/five_dp"
     android:orientation="vertical">
 
 
@@ -14,90 +16,110 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/YourGoal"
+            android:textSize="@dimen/eighteen_sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvGoalName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvGoalName"
-            android:text="@string/YourGoal" />
+            android:text="@string/YourGoal"
+            android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/five_dp"
             android:text="@string/GoalStartingDate"
+            android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/tvGoalStartDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/GoalStartingDate" />
+            android:layout_marginLeft="@dimen/five_dp"
+            android:text="@string/GoalStartingDate"
+            android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/five_dp"
             android:text="@string/TotalDaysOfGoal"
+            android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/tvTotalDaysOfGoal"
-            android:text="@string/TotalDaysOfGoal" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:text="@string/TotalDaysOfGoal"
+            android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/five_dp"
             android:text="@string/TotalDaysYouCompleted"
+            android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvTotalGoalCompletionDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTotalGoalCompletionDay"
-            android:text="@string/YourGoal" />
+            android:layout_marginLeft="@dimen/five_dp"
+            android:text="@string/YourGoal"
+            android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
+android:layout_marginBottom="@dimen/five_dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/five_dp"
             android:text="@string/GoalEndDate"
+            android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvGoalEndDate"
             android:layout_width="wrap_content"
-android:id="@+id/tvGoalEndDate"
             android:layout_height="wrap_content"
-            android:text="@string/GoalEndDate" />
+            android:layout_marginLeft="@dimen/five_dp"
+            android:text="@string/GoalEndDate"
+            android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>

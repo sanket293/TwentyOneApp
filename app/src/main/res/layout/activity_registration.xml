@@ -4,28 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/common_application_margin"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".RegistrationActivity">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/RegistrationForTwentyOne"
+        android:textSize="@dimen/twenty_two_sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:text="@string/Name"
 
-            android:text="@string/Name" />
+            android:textSize="@dimen/sixteen_sp" />
 
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/Name" />
+            android:hint="@string/Name"
+            android:textSize="@dimen/sixteen_sp" />
 
     </LinearLayout>
 
@@ -38,8 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-
-            android:text="@string/Password" />
+            android:text="@string/Password"
+            android:textSize="@dimen/sixteen_sp" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -48,7 +60,8 @@
             android:layout_weight="1"
             android:hint="@string/Password"
             android:inputType="textPassword"
-            android:maxLength="20" />
+            android:maxLength="20"
+            android:textSize="@dimen/sixteen_sp" />
 
     </LinearLayout>
 
@@ -59,10 +72,10 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
-
-            android:text="@string/ConfirmPassword" />
+            android:text="@string/ConfirmPassword"
+            android:textSize="@dimen/sixteen_sp" />
 
         <EditText
             android:id="@+id/etConfirmPassword"
@@ -71,7 +84,8 @@
             android:layout_weight="1"
             android:hint="@string/ConfirmPassword"
             android:inputType="textPassword"
-            android:maxLength="20" />
+            android:maxLength="20"
+            android:textSize="@dimen/sixteen_sp" />
 
     </LinearLayout>
 
@@ -84,15 +98,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-
-            android:text="@string/Email" />
+            android:text="@string/Email"
+            android:textSize="@dimen/sixteen_sp" />
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/Email" />
+            android:hint="@string/Email"
+            android:textSize="@dimen/sixteen_sp" />
 
     </LinearLayout>
 
@@ -105,8 +120,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-
-            android:text="@string/Phone" />
+            android:text="@string/Phone"
+            android:textSize="@dimen/sixteen_sp" />
 
         <EditText
             android:id="@+id/etPhone"
@@ -115,7 +130,8 @@
             android:layout_weight="1"
             android:hint="@string/Phone_number"
             android:inputType="number"
-            android:maxLength="10" />
+            android:maxLength="10"
+            android:textSize="@dimen/sixteen_sp" />
 
     </LinearLayout>
 
@@ -123,11 +139,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
         android:orientation="horizontal">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/five_dp"
             android:layout_weight="1"
             android:onClick="onRegistrationBtnClick"
             android:text="@string/SignUp" />
@@ -135,6 +153,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five_dp"
             android:layout_weight="1"
             android:onClick="onCancelbtnClick"
             android:text="@string/Cancel" />
@@ -143,14 +162,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fifty_dp"
+        android:layout_marginTop="@dimen/five_dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:onClick="onLoginClick"
-            android:text="@string/Register"
+            android:text="@string/LoginHere"
             android:textColor="@color/blue" />
 
     </LinearLayout>

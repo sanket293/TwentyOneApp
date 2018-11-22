@@ -4,94 +4,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".GoalConfirmation">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/common_application_margin"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/YourGoal" />
-
-        <TextView
-            android:id="@+id/tvGoalOfUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:gravity="center"
-            android:text="@string/YourGoal" />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:text="@string/TotalDaysYouCompleted" />
-
-        <TextView
-            android:id="@+id/tvGoalCompletedDays"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:text="@string/TotalDaysYouCompleted" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/DidYouCompletedYourGoal" />
+            android:text="@string/ConfirmGoal"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/twenty_two_sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/thirty_dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/YourGoal"
+                android:textSize="@dimen/eighteen_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvGoalOfUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five_dp"
+                android:gravity="center"
+                android:text="@string/YourGoal"
+                android:textSize="@dimen/eighteen_sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/TotalDaysYouCompleted"
+                android:textSize="@dimen/fourteen_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvGoalCompletedDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/TotalDaysYouCompleted"
+                android:textSize="@dimen/fourteen_sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/DidYouCompletedYourGoal"
+                android:textSize="@dimen/sixteen_sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/five_dp"
+                    android:layout_weight="1"
+                    android:onClick="onYesBtnClick"
+                    android:text="@string/Yes" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/five_dp"
+                    android:layout_weight="1"
+                    android:onClick="onNoBtnClick"
+                    android:text="@string/No" />
+
+            </LinearLayout>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-android:onClick="onYesBtnClick"                android:layout_weight="1"
-                android:text="@string/Yes" />
+                android:layout_marginBottom="@dimen/hundred_fifty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:onClick="onCancelBtnClick"
+                android:text="@string/Cancel" />
 
-            <Button
-                android:onClick="onNoBtnClick"                       android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/No" />
 
         </LinearLayout>
 
-        <Button
-            android:onClick="onCancelBtnClick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Cancel" />
-
 
     </LinearLayout>
-
-
 </LinearLayout>

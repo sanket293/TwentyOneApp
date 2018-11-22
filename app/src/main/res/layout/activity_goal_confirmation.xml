@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/YourGoal"
+                android:textColor="@color/dark_green"
                 android:textSize="@dimen/eighteen_sp"
                 android:textStyle="bold" />
 
@@ -46,6 +47,7 @@
                 android:layout_marginTop="@dimen/five_dp"
                 android:gravity="center"
                 android:text="@string/YourGoal"
+                android:textColor="@color/light_green"
                 android:textSize="@dimen/eighteen_sp" />
 
 
@@ -63,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/TotalDaysYouCompleted"
+                android:textColor="@color/yellow"
                 android:textSize="@dimen/fourteen_sp"
                 android:textStyle="bold" />
 
@@ -72,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/TotalDaysYouCompleted"
+                android:textColor="@color/black"
                 android:textSize="@dimen/fourteen_sp" />
 
         </LinearLayout>
@@ -88,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/DidYouCompletedYourGoal"
+                android:textColor="@color/light_orange"
                 android:textSize="@dimen/sixteen_sp"
                 android:textStyle="bold" />
 
@@ -102,16 +107,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/five_dp"
                     android:layout_weight="1"
+                    android:background="@color/btn_green"
                     android:onClick="onYesBtnClick"
-                    android:text="@string/Yes" />
+                    android:text="@string/Yes"
+                    android:textColor="@color/white" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/five_dp"
                     android:layout_weight="1"
+                    android:background="@color/btn_negative"
                     android:onClick="onNoBtnClick"
-                    android:text="@string/No" />
+                    android:text="@string/No"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -120,8 +129,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/hundred_fifty_dp"
                 android:layout_marginTop="@dimen/ten_dp"
+                android:background="@color/btn_cancel"
                 android:onClick="onCancelBtnClick"
-                android:text="@string/Cancel" />
+                android:text="@string/Cancel"
+                android:textColor="@color/white" />
 
 
         </LinearLayout>

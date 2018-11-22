@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:background="@color/app_background"
+    android:background="@color/app_background"
     android:orientation="vertical"
     tools:context=".AdminQuoteDeleteActivity">
 
@@ -28,6 +28,7 @@ android:background="@color/app_background"
 
 
         <EditText
+            android:textColor="@color/edit_text"
             android:id="@+id/etQuoteChange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,6 +50,8 @@ android:background="@color/app_background"
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+android:background="@color/btn_green"
+                    android:textColor="@color/white"
                     android:layout_marginRight="@dimen/five_dp"
                     android:layout_weight="1"
                     android:onClick="onUpdateQuotesBtnClick"
@@ -59,6 +62,8 @@ android:background="@color/app_background"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/five_dp"
                     android:layout_weight="1"
+                    android:background="@color/dark_red"
+                    android:textColor="@color/white"
                     android:onClick="onDeleteQuotesBtnClick"
                     android:text="@string/DeleteQuotes" />
 
@@ -67,16 +72,13 @@ android:background="@color/app_background"
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/hundred_fifty_dp"
                 android:layout_marginTop="@dimen/five_dp"
                 android:layout_weight="1"
-                android:layout_marginBottom="@dimen/hundred_fifty_dp"
+                android:background="@color/btn_cancel"
+                android:textColor="@color/white"
                 android:onClick="onCancelbtnClick"
                 android:text="@string/Cancel" />
-
-
-
-
-
 
 
         </LinearLayout>

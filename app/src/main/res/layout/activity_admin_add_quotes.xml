@@ -38,6 +38,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/AddNewQuotes"
+                android:textColor="@color/light_orange"
                 android:textSize="@dimen/sixteen_sp" />
 
             <EditText
@@ -45,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/edit_text"
                 android:textSize="@dimen/sixteen_sp" />
 
 
@@ -61,16 +63,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/five_dp"
                 android:layout_weight="1"
+                android:background="@color/btn_green"
                 android:onClick="onAddNewQuotesBtnClick"
-                android:text="@string/AddNewQuotes" />
+                android:text="@string/AddNewQuotes"
+                android:textColor="@color/white" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/five_dp"
                 android:layout_weight="1"
+                android:background="@color/btn_cancel"
                 android:onClick="onCancelbtnClick"
-                android:text="@string/Cancel" />
+                android:text="@string/Cancel"
+                android:textColor="@color/white" />
         </LinearLayout>
 
 
@@ -96,10 +102,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/five_dp"
+            android:background="@color/btn_refresh"
             android:gravity="center"
             android:onClick="onRefreshBtnClick"
-            android:text="refresh" />
+            android:text="refresh"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>
+
 </LinearLayout>

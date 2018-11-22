@@ -12,6 +12,7 @@
     <color name="yellow">#D4AC0D</color>
     <color name="green">#27AE60</color>
     <color name="red">#ff0000</color>
+    <color name="black">#000000</color>
 
     <color name="light_green">#2ECC71</color>
     <color name="light_orange">#DC7633</color>
@@ -27,8 +28,10 @@
     <color name="title_color">#273746</color>
 
     <color name="btn_dark_cyan">#2C3E50</color>
+    <color name="btn_refresh">#2C3E50</color>
     <color name="btn_green">#186A3B</color>
     <color name="btn_cancel">#17202A</color>
+    <color name="btn_negative">#641E16</color>
 
 
 </resources>

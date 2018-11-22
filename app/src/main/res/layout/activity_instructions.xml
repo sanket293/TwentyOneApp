@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
+        android:textColor="@color/title_color"
         android:text="@string/Instructions"
         android:textSize="@dimen/sixteen_sp" />
 

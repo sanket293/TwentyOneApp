@@ -9,6 +9,7 @@
         android:padding="@dimen/five_dp"
         android:text="@string/action_sign_in"
         android:textSize="@dimen/fourteen_sp"
+        android:textColor="@color/btn_dark_cyan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

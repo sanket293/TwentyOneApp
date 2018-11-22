@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:layout_margin="@dimen/five_dp"
+    android:gravity="center"
     android:orientation="vertical">
 
 
@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/YourGoal"
+            android:textColor="@color/btn_green"
             android:textSize="@dimen/eighteen_sp"
             android:textStyle="bold" />
 
@@ -24,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/YourGoal"
+            android:textColor="@color/light_green"
             android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
 
@@ -38,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/five_dp"
             android:text="@string/GoalStartingDate"
+            android:textColor="@color/light_orange"
             android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
@@ -45,6 +48,8 @@
             android:id="@+id/tvGoalStartDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:textColor="@color/black"
             android:layout_marginLeft="@dimen/five_dp"
             android:text="@string/GoalStartingDate"
             android:textSize="@dimen/sixteen_sp" />
@@ -61,12 +66,15 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/five_dp"
             android:text="@string/TotalDaysOfGoal"
+            android:textColor="@color/light_orange"
             android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvTotalDaysOfGoal"
             android:layout_width="wrap_content"
+
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/five_dp"
             android:text="@string/TotalDaysOfGoal"
@@ -85,6 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/five_dp"
             android:text="@string/TotalDaysYouCompleted"
+            android:textColor="@color/light_orange"
+
             android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
@@ -93,6 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/five_dp"
+
+            android:textColor="@color/black"
             android:text="@string/YourGoal"
             android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
@@ -100,8 +112,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/five_dp"
+
         android:layout_marginTop="@dimen/five_dp"
-android:layout_marginBottom="@dimen/five_dp"
         android:orientation="horizontal">
 
         <TextView
@@ -109,6 +122,7 @@ android:layout_marginBottom="@dimen/five_dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/five_dp"
             android:text="@string/GoalEndDate"
+            android:textColor="@color/light_orange"
             android:textSize="@dimen/sixteen_sp"
             android:textStyle="bold" />
 
@@ -118,6 +132,7 @@ android:layout_marginBottom="@dimen/five_dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/five_dp"
             android:text="@string/GoalEndDate"
+            android:textColor="@color/black"
             android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
 

@@ -8,6 +8,7 @@
     <string name="Password">Password</string>
     <string name="ConfirmPassword">Confirm Password</string>
     <string name="Login">Login</string>
+    <string name="LogOut">Logout</string>
     <string name="LoginHere">Login here</string>
     <string name="Cancel">Cancel</string>
     <string name="Register">Register here</string>
@@ -26,6 +27,7 @@
     <string name="SetYourHabitOrGoal">Set Your Habit Or Goal</string>
     <string name="EnterYourGoal">Enter Your Goal</string>
     <string name="SetGoal">Set Goal</string>
+    <string name="userLogoutSuccessfully">User Logout Successfully</string>
     <string name="ConfirmGoal">Confirm Your Goal</string>
     <string name="YourGoalList">Your Goal List</string>
     <string name="YourGoal">Your Goal</string>

@@ -609,19 +609,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
             if (cursor != null) {
 
+                if (cursor.moveToFirst()) {
+                    do {
+                        int quotesId = cursor.getInt(cursor.getColumnIndex("quotesId"));
+                        String quotesStr = cursor.getString(cursor.getColumnIndex("quotes"));
 
-                cursor.moveToFirst();
-                while (!cursor.isLast()) {
-                    if (cursor.getCount() == quotesList.size()) {
-                        break;
-                    }
-                    int quotesId = cursor.getInt(cursor.getColumnIndex("quotesId"));
-                    String quotesStr = cursor.getString(cursor.getColumnIndex("quotes"));
-
-                    Quotes quotes = new Quotes(quotesId, quotesStr);
-                    quotesList.add(quotes);
-
+                        Quotes quotes = new Quotes(quotesId, quotesStr);
+                        quotesList.add(quotes);
+                    } while (cursor.moveToNext());
                 }
+
 
                 cursor.close();
             } else {
@@ -636,7 +633,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public boolean updateQuotes(int quoteId, String quotes) {
         try {
-            String query = "UPDATE Quotes SET quotes = '" + quotes + "' WHERE quoteId = '" + quoteId + "' ";
+            String query = "UPDATE Quotes SET quotes = '" + quotes + "' WHERE quotesId = '" + quoteId + "' ";
+            Log.e("update query of quotes", "." + query);
             sqliteDb.execSQL(query);
 
         } catch (Exception e) {
@@ -651,7 +649,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         try {
 
             String query = "delete from Quotes where quotesId ='" + quoteId + "';";
-//            String query = "DELETE Quotes SET quotes = '" + quotes+ "' WHERE quoteId = '" + quoteId + "' ";
+            Log.e("delete query of quotes", "." + query);
             sqliteDb.execSQL(query);
 
         } catch (Exception e) {

@@ -39,6 +39,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        redirectToLoginScreen();
+        super.onBackPressed();
+    }
 
     // click functions
     public void onRegistrationBtnClick(View view) {
@@ -81,11 +86,11 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
-        int phone=0;
+        int phone = 0;
         try {
-             phone = Integer.parseInt(phoneStr);
+            phone = Integer.parseInt(phoneStr);
         } catch (Exception e) {
-            Log.e("exc", "."+e);
+            Log.e("exc", "." + e);
         }
 
 
@@ -96,7 +101,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(context, getResources().getString(R.string.msg_UserSuccessfullyRegistered), Toast.LENGTH_SHORT).show();
 
             Log.e("successfull", "onSignup btn ");
-            goToLoginScreen();// redirect to login screen
+            redirectToLoginScreen();// redirect to login screen
 
         } else {
             Log.e("error", "onSignup btn ");
@@ -115,7 +120,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void onLoginClick(View view) {
         clearAllEditText();
-        goToLoginScreen();
+        redirectToLoginScreen();
 
     }
 
@@ -131,7 +136,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    private void goToLoginScreen() {
+    private void redirectToLoginScreen() {
         startActivity(new Intent(context, LoginActivity.class));
         finish();
 

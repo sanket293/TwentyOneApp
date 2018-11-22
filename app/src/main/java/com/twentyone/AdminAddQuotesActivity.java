@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -33,14 +37,53 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
     }
 
     private void findId() {
+        setupToolBar();
+
         dataBaseHelper = DataBaseHelper.getInstance(context); //  create instance of db
 
         etAddNewQuotes = (TextView) findViewById(R.id.etAddNewQuotes);
         lvQuotes = (ListView) findViewById(R.id.lvQuotes);
 
-       fillQuoteListView();
+        fillQuoteListView();
+
 
     }
+
+    private void setupToolBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_admin, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home) {
+
+            redirectToLoginPage("");
+        }
+        if (menuItem.getItemId() == R.id.ic_logout) {
+            redirectToLoginPage(getResources().getString(R.string.LogOut));
+        }
+
+
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    private void redirectToLoginPage(String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(context, LoginActivity.class));
+        finish();
+    }
+
 
     public void onAddNewQuotesBtnClick(View view) {
 
@@ -59,7 +102,7 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
             Toast.makeText(context, getResources().getString(R.string.msg_QuoteaddedSuccessfully)
                     , Toast.LENGTH_SHORT).show();
 
-    //    fillQuoteListView();
+            fillQuoteListView();
 
 
         } else {
@@ -85,12 +128,13 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
     public void onCancelbtnClick(View view) {
         etAddNewQuotes.setText("");
     }
+
     public void onRefreshBtnClick(View view) {
         etAddNewQuotes.setText("");
+        startActivity(new Intent(context, AdminAddQuotesActivity.class));
+        finish();
 
-        fillQuoteListView();
     }
-
 
     public class ListviewAdapter extends BaseAdapter {
 
@@ -145,7 +189,8 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     try {
-                        startActivity(new Intent(context, AdminQuoteDeleteActivity.class).putExtra("quoteId", quoteId).putExtra("quoteName",quoteName));
+                        startActivity(new Intent(context, AdminQuoteDeleteActivity.class).putExtra("quoteId", quoteId).putExtra("quoteName", quoteName));
+                        finish();
                     } catch (Exception e) {
                         Log.e("error main row adapter", e.getMessage());
                     }

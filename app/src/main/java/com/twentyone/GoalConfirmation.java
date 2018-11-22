@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +32,47 @@ public class GoalConfirmation extends AppCompatActivity {
         findId();
     }
 
-    private void findId() {
 
+    private void setupToolBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.YourGoalList));
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_users, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        if (menuItem.getItemId() == R.id.ic_logout) {
+
+            Toast.makeText(context, getResources().getString(R.string.LogOut), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(context, LoginActivity.class));
+            finish();
+
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    public void onBackPressed() {
+        redirectToGoalListActivity("");
+        super.onBackPressed();
+    }
+
+
+    private void findId() {
+        setupToolBar();
         Intent intent = getIntent();
         goalId = intent.getIntExtra("goalId", -1);
         goalName = intent.getStringExtra("goalName");
@@ -42,7 +84,6 @@ public class GoalConfirmation extends AppCompatActivity {
             startActivity(new Intent(GoalConfirmation.this, GoalListActivity.class));
             finish();
         }
-
         if (name.equalsIgnoreCase("")) {
             startActivity(new Intent(GoalConfirmation.this, GoalListActivity.class));
             finish();
@@ -87,7 +128,6 @@ public class GoalConfirmation extends AppCompatActivity {
         Toast.makeText(context, "." + message, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(context, GoalListActivity.class));
         finish();
-
     }
 
 

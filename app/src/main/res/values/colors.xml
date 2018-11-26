@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#00574b</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="app_background">#D6DBDF</color>
+    <color name="app_background">#d6dbdf</color>
 
 
     <color name="white">#FDFEFE</color>
@@ -27,7 +27,7 @@
     <color name="edit_text">#566573</color>
     <color name="title_color">#273746</color>
 
-    <color name="btn_dark_cyan">#2C3E50</color>
+    <color name="btn_dark_cyan">#2c3e50</color>
     <color name="btn_refresh">#2C3E50</color>
     <color name="btn_green">#186A3B</color>
     <color name="btn_cancel">#17202A</color>

@@ -15,23 +15,14 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ten_dp"
-            android:gravity="center"
-            android:text="@string/WelcomeToTwentyOne"
-            android:textColor="@color/title_color"
-            android:textSize="@dimen/twenty_two_sp" />
-
 
         <ImageView
-            android:layout_width="@dimen/hundred_fifty_dp"
-            android:layout_height="@dimen/hundred_fifty_dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
 
             android:layout_marginTop="@dimen/ten_dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/logo1" />
 
 
         <LinearLayout
@@ -51,13 +42,12 @@ android:textColor="@color/light_orange"
                 android:textSize="@dimen/fourteen_sp" />
 
             <EditText
-                android:textColor="@color/edit_text"
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/Email"
-                android:text="admin"
+                android:textColor="@color/edit_text"
                 android:textSize="@dimen/fourteen_sp" />
 
         </LinearLayout>
@@ -83,10 +73,9 @@ android:textColor="@color/light_orange"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/Password"
-                android:textColor="@color/edit_text"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:text="admin"
+                android:textColor="@color/edit_text"
                 android:textSize="@dimen/fourteen_sp" />
 
         </LinearLayout>

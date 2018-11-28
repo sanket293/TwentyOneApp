@@ -28,6 +28,7 @@
             android:padding="@dimen/five_dp">
 
 
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +62,6 @@
                 android:onClick="onViewRecords"
                 android:text="@string/ViewGoalRecords"
                 android:textColor="@color/white" />
-
 
         </LinearLayout>
     </LinearLayout>

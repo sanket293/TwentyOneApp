@@ -12,13 +12,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.twentyone.CommonFunctions.getUserName;
 
@@ -33,7 +37,10 @@ public class GoalListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal_list);
         findId();
+
     }
+
+
 
     private void setupToolBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,6 +97,8 @@ public class GoalListActivity extends AppCompatActivity {
             ListviewAdapter listviewAdapter = new ListviewAdapter(goalList);
             lvGoalList.setAdapter(listviewAdapter);
         }
+
+
     }
 
 

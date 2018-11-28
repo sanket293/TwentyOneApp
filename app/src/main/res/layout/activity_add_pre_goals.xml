@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/app_background"
-    android:orientation="vertical"
-    tools:context=".AdminAddQuotesActivity">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/app_background"
+android:orientation="vertical"
+tools:context=".AddPreGoals">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/AddNewQuotes"
+            android:text="@string/addPreGoals"
             android:textColor="@color/title_color"
             android:textSize="@dimen/twenty_two_sp"
             android:textStyle="bold" />
@@ -36,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/AddNewQuotes"
+                android:text="@string/addPreGoals"
                 android:textColor="@color/light_orange"
                 android:textSize="@dimen/sixteen_sp" />
 
@@ -63,8 +66,9 @@
                 android:layout_marginRight="@dimen/five_dp"
                 android:layout_weight="1"
                 android:background="@color/btn_green"
-                android:onClick="onAddNewQuotesBtnClick"
-                android:text="@string/AddNewQuotes"
+
+                android:onClick="onAddPreGoalsBtnClick"
+                android:text="@string/addPreGoals"
                 android:textColor="@color/white" />
 
             <Button
@@ -73,6 +77,7 @@
                 android:layout_marginLeft="@dimen/five_dp"
                 android:layout_weight="1"
                 android:background="@color/btn_cancel"
+
                 android:onClick="onCancelbtnClick"
                 android:text="@string/Cancel"
                 android:textColor="@color/white" />
@@ -87,7 +92,7 @@
             android:orientation="vertical">
 
             <ListView
-                android:id="@+id/lvQuotes"
+                android:id="@+id/preGoalsLV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -95,7 +100,6 @@
 
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,27 +107,28 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five_dp"
+                android:layout_marginRight="@dimen/ten_dp"
+                android:layout_weight="1"
+                android:background="@color/btn_green"
+
+                android:onClick="onAdminAddQuotesClick"
+                android:text="@string/AddNewQuotes"
+                android:textColor="@color/white" />
+
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/five_dp"
                 android:layout_weight="1"
                 android:background="@color/btn_refresh"
+
                 android:onClick="onRefreshBtnClick"
                 android:text="refresh"
-                android:textColor="@color/white"
-                android:layout_marginRight="@dimen/ten_dp"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five_dp"
-                android:layout_weight="1"
-                android:background="@color/btn_green"
-                android:onClick="onAddPreGoalsClick"
-                android:text="@string/addPreGoals"
                 android:textColor="@color/white" />
         </LinearLayout>
-
 
     </LinearLayout>
 

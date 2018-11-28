@@ -136,6 +136,13 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
 
     }
 
+    public void onAddPreGoalsClick(View view) {
+        startActivity(new Intent(context, AddPreGoals.class));
+        finish();
+
+    }
+
+
     public class ListviewAdapter extends BaseAdapter {
 
         private List<Quotes> quoteList = new ArrayList<>();

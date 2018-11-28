@@ -1,5 +1,6 @@
 package com.twentyone;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static com.twentyone.CommonFunctions.getUserName;
 
@@ -118,6 +121,7 @@ public class UserRecordsActivity extends AppCompatActivity {
             return position;
         }
 
+        @SuppressLint("WrongViewCast")
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
@@ -135,8 +139,7 @@ public class UserRecordsActivity extends AppCompatActivity {
                 holder.tvTotalGoalCompletionDay = (TextView) convertView.findViewById(R.id.tvTotalGoalCompletionDay);
                 holder.tvTotalDaysOfGoal = (TextView) convertView.findViewById(R.id.tvTotalDaysOfGoal);
                 holder.tvGoalName = (TextView) convertView.findViewById(R.id.tvGoalName);
-
-
+                holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -158,7 +161,8 @@ public class UserRecordsActivity extends AppCompatActivity {
             holder.tvGoalEndDate.setText(goalEndDate);
             holder.tvTotalGoalCompletionDay.setText("" + goalCompletionDays);
             holder.tvTotalDaysOfGoal.setText("" + totalDaysOfGoal);
-
+            holder.progressBar.setMax(totalDaysOfGoal);
+            holder.progressBar.setProgress(goalCompletionDays);
 
             final int goalId = goalRecordsList.get(position).getGoalId();
 
@@ -181,6 +185,7 @@ public class UserRecordsActivity extends AppCompatActivity {
 
     public class ViewHolder {
         TextView tvTextAdapter, tvGoalEndDate, tvGoalStartDate, tvTotalGoalCompletionDay, tvTotalDaysOfGoal, tvGoalName;
+        ProgressBar progressBar;
 
     }
 

@@ -291,6 +291,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return true;
     }
+
+    public boolean addPreGoalString(String preGoalStr) {
+
+        if (preGoalStr.equalsIgnoreCase("")) {
+            return false;
+        }
+
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+
+
+            String query = "insert into PredefinedGoals(preGoal) values('" + preGoalStr + "');";
+
+            Log.e("admin add predefined goal string", "." + query);
+
+            sqliteDb = instance.getWritableDatabase();
+            sqliteDb.execSQL(query);
+
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
     //////////  UPDATE
 
     public boolean updateGoalCompletionDays(int goalId, int goalCompletionDay) {
@@ -629,6 +657,61 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return quotesList;
+    }
+
+
+
+
+
+
+
+
+
+    public List<PredefinedGoals> getPreGoal() {
+
+        List<PredefinedGoals> preGoalList = null;
+        try {
+            if (sqliteDb.isOpen()) {
+                sqliteDb.close();
+            }
+            sqliteDb = instance.getWritableDatabase();
+
+            String query = "select * from PredefinedGoals;";
+            Log.e("getting all Pre Goals query ", "." + query);
+
+            Cursor cursor = sqliteDb.rawQuery(query, null);
+
+            if (cursor.getCount() == 0) {
+
+                cursor.close();
+                return preGoalList;
+            } else {
+                preGoalList = new ArrayList<>();
+            }
+
+
+            if (cursor != null) {
+
+                if (cursor.moveToFirst()) {
+                    do {
+                        int preGoalID = cursor.getInt(cursor.getColumnIndex("preGoalID"));
+                        String preGoalStr = cursor.getString(cursor.getColumnIndex("preGoal"));
+
+                        PredefinedGoals predefinedGoals = new PredefinedGoals(preGoalID, preGoalStr);
+                        preGoalList.add(predefinedGoals);
+                    } while (cursor.moveToNext());
+                }
+
+
+                cursor.close();
+            } else {
+                Log.e("error in db", "cursor is null at getquotes function");
+            }
+        } catch (Exception e) {
+            System.out.println("DB ERROR  " + e.getMessage());
+            e.printStackTrace();
+        }
+        return preGoalList;
     }
 
     public boolean updateQuotes(int quoteId, String quotes) {

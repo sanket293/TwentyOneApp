@@ -71,6 +71,14 @@ public class GoalListActivity extends AppCompatActivity {
             // TODO set null value to sp
 
         }
+//        if (menuItem.getItemId() == R.id.rating) {
+//
+//            Toast.makeText(context, getResources().getString(R.string.LogOut), Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(context, LoginActivity.class));
+//            finish();
+//            // TODO set null value to sp
+//
+//        }
         return super.onOptionsItemSelected(menuItem);
     }
 

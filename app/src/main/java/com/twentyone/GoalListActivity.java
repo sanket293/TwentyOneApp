@@ -104,7 +104,7 @@ public class GoalListActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.rating) {
 
             Toast.makeText(context, getResources().getString(R.string.Cancel), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(context, NotificationActivity.class));
+            startActivity(new Intent(context, FeedbackActivity.class));
             finish();
             // TODO set null value to sp
 
@@ -126,9 +126,15 @@ public class GoalListActivity extends AppCompatActivity {
             {
                 List<Quotes> list = new ArrayList<>();
                 list = dataBaseHelper.getQuotes();
+                String dailyQuote = "Just Do It.";
                 Random r = new Random();
-                int i = r.nextInt(list.size()) + 0;
-                String dailyQuote = list.get(i).getQuotes().toString();
+                if(list.isEmpty()){
+
+                }
+                else {
+                    int i = r.nextInt(list.size()) + 0;
+                     dailyQuote = list.get(i).getQuotes().toString();
+                }
                 Notification.Builder nb = null;
                 Notification.Builder nb1 = null;
                 Log.i(TAG,"BroadcastReceiver::OnReceive() >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");

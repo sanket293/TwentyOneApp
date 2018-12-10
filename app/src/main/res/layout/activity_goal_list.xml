@@ -28,14 +28,9 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:padding="@dimen/five_dp">
+            <!--android:text="Create a Notification"-->
 
-            <Button
-                android:id="@+id/button_create_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create a Notification"
-                tools:layout_editor_absoluteX="98dp"
-                tools:layout_editor_absoluteY="231dp" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,8 +39,14 @@
                 android:text="@string/AddGoal"
                 android:textColor="@color/white" />
 
-
-
+            <Button
+                android:id="@+id/button_create_notification"
+                android:layout_width="49dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:background="@drawable/notification"
+                tools:layout_editor_absoluteX="98dp"
+                tools:layout_editor_absoluteY="231dp" />
 
         </LinearLayout>
 

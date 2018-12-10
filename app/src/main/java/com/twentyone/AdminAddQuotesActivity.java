@@ -66,12 +66,30 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == android.R.id.home) {
-
-            redirectToLoginPage("");
-        }
         if (menuItem.getItemId() == R.id.ic_logout) {
-            redirectToLoginPage(getResources().getString(R.string.LogOut));
+
+            Toast.makeText(context, getResources().getString(R.string.LogOut), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(context, LoginActivity.class));
+            finish();
+            // TODO set null value to sp
+
+        }
+        if (menuItem.getItemId() == R.id.addPreGoals_menu) {
+
+            Toast.makeText(context, getResources().getString(R.string.Cancel), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(context, AddPreGoals.class));
+            finish();
+            // TODO set null value to sp
+
+        }
+
+        if (menuItem.getItemId() == R.id.addNewQuotes_menu) {
+
+            Toast.makeText(context, getResources().getString(R.string.Cancel), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(context, AdminAddQuotesActivity.class));
+            finish();
+            // TODO set null value to sp
+
         }
 
 
@@ -136,11 +154,11 @@ public class AdminAddQuotesActivity extends AppCompatActivity {
 
     }
 
-    public void onAddPreGoalsClick(View view) {
-        startActivity(new Intent(context, AddPreGoals.class));
-        finish();
-
-    }
+//    public void onAddPreGoalsClick(View view) {
+//        startActivity(new Intent(context, AddPreGoals.class));
+//        finish();
+//
+//    }
 
 
     public class ListviewAdapter extends BaseAdapter {

@@ -125,12 +125,14 @@ public class AddPreGoals extends AppCompatActivity {
         finish();
 
     }
+//
+//    public void onAdminAddQuotesClick(View view) {
+//        startActivity(new Intent(context, AdminAddQuotesActivity.class));
+//        finish();
+//
+//    }
 
-    public void onAdminAddQuotesClick(View view) {
-        startActivity(new Intent(context, AdminAddQuotesActivity.class));
-        finish();
 
-    }
 
 
 

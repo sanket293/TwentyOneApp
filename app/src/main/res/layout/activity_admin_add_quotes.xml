@@ -113,15 +113,7 @@
                 android:textColor="@color/white"
                 android:layout_marginRight="@dimen/ten_dp"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five_dp"
-                android:layout_weight="1"
-                android:background="@color/btn_green"
-                android:onClick="onAddPreGoalsClick"
-                android:text="@string/addPreGoals"
-                android:textColor="@color/white" />
+
         </LinearLayout>
 
 

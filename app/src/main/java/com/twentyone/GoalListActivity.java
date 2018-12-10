@@ -1,7 +1,12 @@
 package com.twentyone;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +20,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +28,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import static com.twentyone.CommonFunctions.getUserName;
@@ -32,11 +39,34 @@ public class GoalListActivity extends AppCompatActivity {
     private ListView lvGoalList;
     private String email = "";
 
+    PendingIntent pendingIntent;
+    AlarmManager alarmManager;
+    BroadcastReceiver mReceiver;
+    private NotificationHelper noti;
+    int id = 1100;
+    int id2 = 1300;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_goal_list);
+        RegisterAlarmBroadcast();
         findId();
+        noti = new NotificationHelper(this);
+        Button createNotificationButton = findViewById(R.id.button_create_notification);
+
+
+        // Waits for you to click the button
+        createNotificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alarmManager.set( AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1000 , pendingIntent );
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10000 , pendingIntent);
+                // Starts the function below
+
+            }
+        });
 
     }
 
@@ -71,15 +101,60 @@ public class GoalListActivity extends AppCompatActivity {
             // TODO set null value to sp
 
         }
-//        if (menuItem.getItemId() == R.id.rating) {
-//
-//            Toast.makeText(context, getResources().getString(R.string.LogOut), Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(context, LoginActivity.class));
-//            finish();
-//            // TODO set null value to sp
-//
-//        }
+        if (menuItem.getItemId() == R.id.rating) {
+
+            Toast.makeText(context, getResources().getString(R.string.Cancel), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(context, NotificationActivity.class));
+            finish();
+            // TODO set null value to sp
+
+        }
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    private void RegisterAlarmBroadcast()
+    {
+
+
+        //This is the call back function(BroadcastReceiver) which will be call when your
+        //alarm time will reached.
+        mReceiver = new BroadcastReceiver()
+        {
+            private static final String TAG = "Alarm Example Receiver";
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                List<Quotes> list = new ArrayList<>();
+                list = dataBaseHelper.getQuotes();
+                Random r = new Random();
+                int i = r.nextInt(list.size()) + 0;
+                String dailyQuote = list.get(i).getQuotes().toString();
+                Notification.Builder nb = null;
+                Notification.Builder nb1 = null;
+                Log.i(TAG,"BroadcastReceiver::OnReceive() >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                Toast.makeText(context, "Congrats!. Your Alarm time has been reached", Toast.LENGTH_LONG).show();
+                nb = noti.getNotification1("Daily Reminder", "Open the app and check your Goal");
+                nb1 = noti.getNotification2("Daily Quote", dailyQuote);
+
+                if (nb != null) {
+                    noti.notify(id++, nb);
+                }
+                if (nb1 != null) {
+                    noti.notify(id2++, nb1);
+                }
+                // addNotification();
+
+            }
+        };
+
+        // register the alarm broadcast here
+        registerReceiver(mReceiver, new IntentFilter("com.twentyone") );
+        pendingIntent = PendingIntent.getBroadcast( this, 0, new Intent("com.twentyone"),0 );
+        alarmManager = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+    }
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 
     @Override

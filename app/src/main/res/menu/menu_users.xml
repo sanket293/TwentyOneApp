@@ -26,9 +26,10 @@
                 android:icon="@drawable/rating"
                 android:orderInCategory="100"
                 android:title="Rating" />
+
             <item
                 android:id="@+id/ic_logout"
-                android:icon="@drawable/logout"
+                android:icon="@drawable/logout3"
                 android:orderInCategory="100"
                 android:title="@string/LogOut" />
 

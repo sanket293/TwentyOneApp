@@ -32,6 +32,7 @@ public class AddGoalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_goal);
         findId();
         populateSpinner();
+
     }
 
     private void findId() {

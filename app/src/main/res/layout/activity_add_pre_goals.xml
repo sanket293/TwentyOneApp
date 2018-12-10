@@ -106,17 +106,7 @@ tools:context=".AddPreGoals">
             android:layout_marginTop="@dimen/five_dp"
             android:orientation="horizontal">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five_dp"
-                android:layout_marginRight="@dimen/ten_dp"
-                android:layout_weight="1"
-                android:background="@color/btn_green"
 
-                android:onClick="onAdminAddQuotesClick"
-                android:text="@string/AddNewQuotes"
-                android:textColor="@color/white" />
 
             <Button
                 android:layout_width="wrap_content"

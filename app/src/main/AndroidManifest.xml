@@ -31,7 +31,7 @@
         <activity android:name=".AdminAddQuotesActivity" />
         <activity android:name=".AdminQuoteDeleteActivity" />
         <activity android:name=".AddPreGoals" />
-
+        <activity android:name=".NotificationActivity"></activity>
     </application>
 
 </manifest> <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
